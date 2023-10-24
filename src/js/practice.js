@@ -81,7 +81,7 @@ console.log(qty) // 4
 
 //2. Написать функцию, которая конвертнет исходный объект в новый по структуре ниже
 const obj2 = { a: 1, b: 2, c: 3 };
-const newObj = {...obj, d: obj.a + obj.c};
+const newObj = {...obj2, d: obj2.a + obj2.c};
 console.log(newObj) // { a: 1, b: 2, c: 3, d: 4 }, где d = (a + c)
 
 //Рабата с классами
