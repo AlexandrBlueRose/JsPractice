@@ -1,135 +1,255 @@
-// Чтобы проверить, выполняй скрипты в консоли браузера
-// по очереди каждый, если все сразу выполнить может забаговать консоль(у Firefox)
 const arr = ['banana', true, 1, 'car', {}, { a: 1 }, 5, true, true, false, 455, {}]
-//Работа с массивами
-//1. Написать новую функцию, которая вернет новый массив, где все числа массива arr
-//будут увеличены в 2 раза
-let res = arr.map(item => typeof(item) === "number"? item*2 : item);
 
-console.log(res)
-//2.Написать новую функцию, которая вернет объект, в котором будут поля с названиями
-//равными типам данным, а в полях будет итоговый подсчет кол-ва элементов в массиве
-//arr
-let res2 = arr.reduce(function(accumulator, item) {
-  if(accumulator[typeof(item)]){
-      accumulator[typeof(item)]++;
-  }
-  else{
-    accumulator[typeof(item)] = 1;
-  }
-  return accumulator;
-}, {})
+/** Работа с массивами **/
 
-console.log(res2);
+/** 
+ * 1. Увеличивает числа входного массива в 2 раза
+ * 
+ * @param {object} arr - Объект из любых элементов
+ * @returns {object} arr - Объект в котором все числа увеличены в 2 раза
+ */
+funcMultiplyingNumByTwo = (arr) => arr.map(item => typeof(item) === "number"? item*2 : item);
 
-//3. Написать функцию, которая отсортирует массив следующим образом: булевы, числа,
-//строки, объекты
-let res3 = arr.sort(function(a, b){
-    if(typeof(a) > typeof(b)){
-        return 1;
-    }
-    else  if(typeof(a) < typeof(b)){
-        if(typeof a == "object"){
-            return 1;
+console.log(funcMultiplyingNumByTwo(arr));
+
+/** 
+ * 2. Возвращает объект в котором поля с названиями равными
+ * типам данным изначального входного, а полях производится итоговый подсчет
+ * кол-ва элементов определенного типа данных
+ * 
+ * @param {object} arr - Объект из любых элементов
+ * @return {object} arr - Объект в котором элем-ты соответствуют типам данных и кол-ву таких элементов в изначальном массиве arr
+ */
+funcCountTypeArgs = (arr) => {
+    return arr.reduce((acc, cur) => {
+        const itemType = typeof(cur);
+        if(acc[itemType]){
+            acc[itemType]++;
         }
         else {
-            return -2;
+            acc[itemType] = 1;
         }
-    }
-})
+        return acc;
+    }, {})
+}
+console.log(funcCountTypeArgs(arr));
 
-console.log(res3);
-
-//4. Написать функцию, которая принимает неограниченное число параметров и
-//возвращает массив, в котором каждое число умножается на общее количество
-//параметров.
-let res4 = function(...a){
-    return a.map(item => item * a.length);
+/** 
+ * 3. Возвращает отсортированный объект в порядке булевы, числа, строки, объекты
+ * 
+ * @param {object} arr - Объект из любых элементов
+ * @return {object} arr - Объект в котором элем-ты отсортированы в порядке булевы, числа, строки, объекты
+ */
+funcSortByType = (arr) => {
+    return arr.sort(function(a, b){
+        if(typeof(a) > typeof(b)){
+            return 1;
+        }
+        else  if(typeof(a) < typeof(b)){
+            if(typeof(a) === "object"){
+                return 1;
+            }
+            else {
+                return -1;
+            }
+        }
+    }) 
 }
 
-console.log(res4(3, 4, 5, 6, 10));
+console.log(funcSortByType(arr));
 
-//5
-//Написать функцию, которая принимает массив слов, а выводит массив уникальных
-//слов отсортированных по количеству повторов этого слова, если у 2х слов параметр
-//уникальности одинаковый, то они должны быть отсортированы между собой по
-//алфавиту.
-let newArr = function(...a){
-    let b = a.sort().reduce(function(accumulator, item) {
-        if(accumulator[item]){
-            accumulator[item]++;
+/** 
+ * 4. Функция принимает неограниченное число параметров и возвращает массив в котором каждое число 
+ * умножается на общее количество эл-тов входного массива.
+ * 
+ * @param {object} args - Набор входных параметров любого типа данных
+ * @return {object} result - Объект, где каждое число умножается на общее количество входных аргументов
+ */
+funcMultiplyingByLenArgs = (...args) => args.map(arg => typeof(arg) === "number" ? arg * args.length : arg);
+
+console.log(funcMultiplyingByLenArgs(3, 4, 5, 6, 10));
+
+/** 
+ * 5. Функция принимает набор слов и возвращает набор слов отсортированных по количеству повторов этого слова, 
+ * если у 2-х слов параметр уникальности одинаковый,
+ * то они должны быть отсортированы между собой по алфавиту.
+ * 
+ * @param {object} words, Массив набора слов
+ * @return {object} result, отсортированный набор слов по количеству повторов и если параметр уникальности одинаковый, 
+ * то сортировка производится по алфавиту
+ */
+funcSortRepeatElem = (words) => {
+    let result = words.sort().reduce(function(acc, cur) {
+        if(acc[cur]){
+            acc[cur]++;
             
         }
         else{
-            accumulator[item] = 1;//инициализация чтобы определить кол-во
+            acc[cur] = 1;
         }
-        return accumulator;
+        return acc;
     }, {});
-    b = Object.entries(b)
-    .sort(([,a],[,b]) => b - a)
-    .reduce((r, [k, v]) => ({ ...r, [k]: v }), {});
-    return Object.keys(b);
+    result = Object.entries(result)
+    .sort(([, count1], [, count2]) => count2 - count1)
+    .reduce((acc, [word, count]) => ({ ...acc, [word]: count }), {});
+    return Object.keys(result);
 }
 
-console.log(newArr('fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana'))
+console.log(func5(['fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana']))
 
-//Работа с объектами
-//1. Написать функцию, которая посчитает количество ключей
+/** Работа с объектами **/
+
 const obj = { a: 1, b: 2, c: 3, d: 1 };
-const qty= Object.keys(obj).length;
-console.log(qty) // 4
 
-//2. Написать функцию, которая конвертнет исходный объект в новый по структуре ниже
+/** 
+ * 1. Функция принимает набор объект пар ключ-значение и вычисляет кол-во ключей.
+ * 
+ * @param {object} obj, объект пар ключ-значение
+ * @return {number} result, кол-во ключей
+ **/
+funcCountNumKeys = (inputObj) => Object.keys(inputObj).length;
+
+console.log(funcCountNumKeys(obj));
+
 const obj2 = { a: 1, b: 2, c: 3 };
-const newObj = {...obj2, d: obj2.a + obj2.c};
-console.log(newObj) // { a: 1, b: 2, c: 3, d: 4 }, где d = (a + c)
 
-//Рабата с классами
-//1. Создать AreaCalculator класс, который будет считать площади фигур. Дополнительно
-//создать 2 класса: Square и Circle.
+/** 
+ * 2. Функция принимает набор массив пар ключ-значение и меняет структуру объекта.
+ * 
+ * @param {object} obj - объект пар ключ-значение
+ * @return {object} result - объект со структурой { a: 1, b: 2, c: 3, d: 4 }, где d = (a + c)
+ **/
+funcChangeObjStructure = (inputObj) => newObject = {...inputObj, d: inputObj.a + inputObj.c};
+
+console.log(funcChangeObjStructure(obj2));
+
+
+/** Работа с классами **/
+
+/** 
+ * Класс создающий новую абстрактную фигуру.
+ * Любые иные не реализованные фигуры должны быть наследниками этого класса.
+ */
 class Figure{
+    
+    /** 
+    * Площадь фигуры. 
+    * @type {number} 
+    */
     #area = 0;
-    constructor(...a){
-        this.area = a;
+
+    /**
+    * Конструктор для создания фигуры
+    * @constructor
+    * @param {number} figureParams - параметры фигуры для вычисления площади
+    */
+    constructor(...figureParams){
+        /** 
+        * @property {number} площадь фигуры.
+        */
+        this.area = figureParams;
     }
+
+    /** 
+    * Возвращает площадь фигуры.
+    * @return result, площадь фигуры.
+    **/
     getArea(){
         return this.area;
     }
 }
+
+/** 
+ * Класс создающий новую сущность квадрата.
+ */
 class Square extends Figure{
+
+    /** 
+    * Площадь фигуры. 
+    * @type {number} 
+    */
     #area = 0;
-    constructor(a){
-        super(a);
-        this.area = a*a;
+
+    /**
+    * Конструктор для создания квадрата
+    * @constructor
+    * @param {number} figureParam - параметры фигуры для вычисления площади
+    */
+    constructor(figureParam){
+        super(figureParam);
+        /** 
+        * @property {number} площадь фигуры.
+        */
+        this.area = figureParam*figureParam;
     }
+
+    /** 
+    * Возвращает площадь фигуры.
+    * @return result, площадь фигуры.
+    **/
     getArea(){
         return this.area;
     }
 }
 
+/** 
+ * Класс создающий новую сущность круга.
+ */
 class Circle extends Figure{
+
+    /** 
+    * Площадь фигуры. 
+    * @type {number} 
+    */
     #area = 0;
-    constructor(r){
+
+    /**
+    * Конструктор для создания круга
+    * @constructor
+    * @param {number} figureParam - параметры фигуры для вычисления площади
+    */
+    constructor(figureParam){
         super(r);
-        this.area = Math.PI * (r * r);
+        this.area = Math.PI * (figureParam * figureParam);
     }
+
+    /** 
+    * Возвращает площадь фигуры.
+    * @return result, площадь фигуры.
+    **/
     getArea(){
         return this.area;
     }
 }
 
+/** 
+ * Класс калькулятор суммы площадей фигур.
+ */
 class AreaCalculator{
-    constructor(...figures){
-        this.figures = figures;
+    /** 
+    * Массив площадей фигур. 
+    * @type {number} 
+    */
+    #figuresArea = 0;
+
+    /**
+    * Конструктор для создания круга
+    * @constructor
+    * @param {number} figuresArea - массив площадей фигур
+    */
+    constructor(...figuresArea) {
+        this.figuresArea = figuresArea;
         
     }
     
-    sum(){
+    /** 
+    * Функция вычисляет сумму площадей фигур.
+    * @return result, сумма площадей фигур
+    **/
+    sum() {
         return this.figures.reduce((sum, current) => sum + current.getArea(), 0);
     }
 }
 
 const area = new AreaCalculator(new Square(10), new Circle(5), new Circle(10))
-console.log(area.sum())
-
-//Тут все задания кроме Итогового, по заданию, Итоговое делается после верстки в 3 пункте практики, поэтому приложу его по завершении практики
+console.log(area.sum());
