@@ -79,23 +79,20 @@ console.log(funcMultiplyingByLenArgs(3, 4, 5, 6, 10));
  * то сортировка производится по алфавиту
  */
 funcSortRepeatElem = (words) => {
-    let result = words.sort().reduce(function(acc, cur) {
+    result = Object.entries(words.sort().reduce(function(acc, cur) {
         if(acc[cur]){
-            acc[cur]++;
-            
+            acc[cur]++;  
         }
         else{
             acc[cur] = 1;
         }
         return acc;
-    }, {});
-    result = Object.entries(result)
-    .sort(([, count1], [, count2]) => count2 - count1)
-    .reduce((acc, [word, count]) => ({ ...acc, [word]: count }), {});
-    return Object.keys(result);
+    }, {})).sort(([, count1], [, count2]) => count2 - count1);
+
+    return Object.keys(Object.fromEntries(result));
 }
 
-console.log(func5(['fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana']))
+console.log(funcSortRepeatElem(['fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana']))
 
 /** Работа с объектами **/
 
@@ -209,7 +206,7 @@ class Circle extends Figure{
     * @param {number} figureParam - параметры фигуры для вычисления площади
     */
     constructor(figureParam){
-        super(r);
+        super(figureParam);
         this.area = Math.PI * (figureParam * figureParam);
     }
 
@@ -247,7 +244,7 @@ class AreaCalculator{
     * @return result, сумма площадей фигур
     **/
     sum() {
-        return this.figures.reduce((sum, current) => sum + current.getArea(), 0);
+        return this.figuresArea.reduce((sum, current) => sum + current.getArea(), 0);
     }
 }
 
