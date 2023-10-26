@@ -78,8 +78,8 @@ console.log(funcMultiplyingByLenArgs(3, 4, 5, 6, 10));
  * @return {object} result, отсортированный набор слов по количеству повторов и если параметр уникальности одинаковый, 
  * то сортировка производится по алфавиту
  */
-funcSortRepeatElem = (words) => {
-    result = Object.entries(words.sort().reduce(function(acc, cur) {
+funcSortRepeatElem = (wordsData) => {
+    wordsData = Object.entries(wordsData.sort().reduce(function(acc, cur) {
         if(acc[cur]){
             acc[cur]++;  
         }
@@ -89,7 +89,7 @@ funcSortRepeatElem = (words) => {
         return acc;
     }, {})).sort(([, count1], [, count2]) => count2 - count1);
 
-    return Object.keys(Object.fromEntries(result));
+    return Object.keys(Object.fromEntries(wordsData));
 }
 
 console.log(funcSortRepeatElem(['fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana']))
