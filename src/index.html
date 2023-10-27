@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="format-detection" content="telephone=no">
+	<meta name="description" content="Website for collecting vacancies from service HH.ru" />
+    <meta name="keywords" content="vacancies, work, greensight, internship, practice, hh.ru">
+    <meta name="author" content="Alexandr Haidarov">
+    <meta property="og:image" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>HtmlCssJsInternship</title>
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <h1 class="header__title">
+                    List of vacancies
+                </h1>
+                <div class="filters header__filters">
+                    <div class="filters__label-wrapper">
+                        <div class="select-wrapper filters__label">
+                            Form
+                            <button class="filter-form select-wrapper__input select-wrapper__input_down" data-Eventual="NotSelected" data-Preliminary="NotSelected">
+                                Not selected
+                            </button>
+                            <ul class="select-wrapper__list">
+                                <li class="select-wrapper__list-item" data-value="full">Full time</li>
+                                <li class="select-wrapper__list-item" data-value="part">Half time</li>
+                                <li class="select-wrapper__list-item" data-value="probation">Part time</li>
+                            </ul>
+                        </div>
+                        <div class="select-wrapper filters__label">
+                            Experience
+                            <button class="filter-experience select-wrapper__input select-wrapper__input_down" data-Eventual="NotSelected" data-Preliminary="NotSelected">
+                                Not selected
+                            </button>
+                            <ul class="select-wrapper__list">
+                                <li class="select-wrapper__list-item" data-value="noExperience">No experience</li>
+                                <li class="select-wrapper__list-item" data-value="between1And3">Between 1 and 3</li>
+                                <li class="select-wrapper__list-item" data-value="between3And6">Between 3 and 6</li>
+                                <li class="select-wrapper__list-item" data-value="moreThan6">More Than 6</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <button class="blue-button filters__search">Search</button>
+                    <div class="filters__clear-filters filters__clear-filters_hide">
+                        <button class="link filters__clear-filters-input">Clear filters</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+        <main class="main">
+            <section class="main__card-section">
+                <h2 class="main__heading-cards">
+                    Card Section
+                </h2>
+                <div class="main__card-list">
+
+                </div>
+                <button class="main__card-load">Load more</button>
+            </section>
+
+            <section class="main__form-section">
+                <h2 class="main__heading-form--hide">
+                    Form Section
+                </h2>
+                <form action="" class="form main__form">
+                    <fieldset class="form__fieldset">
+                        <legend class="form__legend">
+                            Leave a request
+                        </legend>
+                        <div class="form__description">
+                            We will advise you and help you start  a new project
+                        </div>
+                        <div class="form__input-list">
+                            <label for="">
+                                Your name
+                                <input type="text">
+                            </label>
+
+                            <label for="">
+                                Your email
+                                <input type="text">
+                            </label>
+
+                            <label for="">
+                                Phone number
+                                <input type="text">
+                            </label>
+
+                            <label for="">
+                                Comment
+                                <input type="text">
+                            </label>
+                        </div>
+                    </fieldset>
+
+
+                    <button class="main__submit-form">Send</button>
+                    <div class="main__submin-description">
+                        By clicking "Send" you confirm your consent to the
+                        <span class="main__submin-span">
+                            processing of personal data
+                        </span>
+                    </div>
+
+                </form>
+
+
+            </section>
+
+        </main>
+
+        <footer class="footer">
+            <div class="footer__contacts">
+
+            </div>
+
+            <div class="footer__location">
+
+            </div>
+        </footer>
+</body>
+</html>
