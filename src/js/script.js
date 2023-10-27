@@ -1,6 +1,4 @@
-import './scss/main.scss';
 'use strict';
-
 let INDEX_CARD_PER_PAGE = 1;
 
 const validationRules = {

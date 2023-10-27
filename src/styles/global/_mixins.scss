@@ -1,0 +1,15 @@
+@mixin mq($from, $to: false) {
+    @if $to {
+      @media (min-width: $from) and (max-width: $to) {
+        @content;
+      }
+    } @else {
+      @media (max-width: $from) {
+        @content;
+      }
+    }
+}
+
+@function font($fontWeight ,$fontSize, $lineHeight: normal, $fontFamily: $fontFamily) {
+    @return #{$fontWeight #{$fontSize}/$lineHeight $fontFamily};
+}

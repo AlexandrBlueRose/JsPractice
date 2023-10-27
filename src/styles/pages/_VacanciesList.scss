@@ -1,0 +1,147 @@
+@use '../global/base';
+@use '../global/fonts';
+@use '../global/mixins';
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: font(normal, $fontSizeXS);
+  color: $black;
+  min-width: $minWidth;
+  overflow-x: hidden;
+  background: $baseColor;
+}
+
+p {
+  font: font(400, $fontSizeM, 140%);
+  @include mq($md) {
+    font: font(400, $fontSizeL, 140%);
+  }
+}
+
+//ToDo
+span, .span {
+  color: $black;
+  word-break: break-all;
+}
+
+h1 {
+  font: font(500, $h1, 120.833%);
+  @include mq($md) {
+    font: font(500, $h1m, 120%);
+  }
+}
+
+h2 {
+  font: font(500, $h2, 125%);
+  @include mq($md) {
+    font: font(500, $h2m, 120%);
+  }
+}
+
+h3 {
+  font: font(500, $h3, 125%);
+  @include mq($md) {
+    font: font(500, $h3m, 120%);
+  }
+}
+
+h4 {
+  font: font(500, $h4, 125%);
+  @include mq($md) {
+    font: font(500, $h4m, 120%);
+  }
+}
+
+strong {
+  color: $black;
+  font: font(500, $fontSizeM, 140%);
+  @include mq($md) {
+    font: font(500, $fontSizeS, 140%);
+  }
+}
+
+li {
+  font: $li;
+  margin-left: calc($major * 3.75);
+  &::marker{
+	  color: $black;
+	  font-size: $fontSizeS; 
+  }
+  @include mq($md) {
+    font: $liM;
+  }
+}
+
+input:invalid:not(:placeholder-shown) {border-color: red;}
+input:valid:not(:placeholder-shown) {border-color: green;}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: url(/src/img/pointing.svg), pointer;
+}
+
+input[placeholder], textarea[placeholder] {
+  font: $placeholderInputTextarea;
+}
+
+
+
+.link {
+  background-color: transparent;
+  border: 0;
+  width: max-content;
+  font-size: $fontSizeM;
+  font-weight: 500;
+  line-height: 145%;
+  color: $blue;
+  text-decoration: none;
+  cursor: url(/src/img/pointing.svg), pointer;
+}
+
+.blue-button {
+  height: 44px;
+  padding: 8px 32px;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 0;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  -ms-border-radius: 4px;
+  -o-border-radius: 4px;
+  background-color: $blue;
+  color: $baseColor;
+  text-align: center;
+  font-size: $button;
+  font-weight: 700;
+  line-height: 140%;
+  cursor: url(/src/img/pointing.svg), pointer;
+  &:hover{
+    background-color: $blueHover;
+  }
+}
+
+.container {
+  max-width: $maxWidthContainer + 40px;
+  margin: 0 auto;
+  padding: 0 20px;
+  @media only screen and (max-width: 1599px) {
+    max-width: $maxWidthContainer - 160px + 64px;
+    padding: 0 32px;
+  }
+
+  @media only screen and (max-width: 640px) {
+    padding: 0 16px;
+  }
+}

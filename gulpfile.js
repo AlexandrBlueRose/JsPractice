@@ -17,7 +17,7 @@ const path = {
     },
     src: {
         html: 'src/*.*',
-        css: 'src/styles/**/*.scss',
+        css: 'src/styles/*.scss',
         js: 'src/js/*.js',
         img:'src/img/*.*',
         fonts:'src/fonts/*.*',
@@ -77,7 +77,7 @@ const buildFonts = () =>
 const serverFunction = () =>
     browserSync({
             server: {
-            baseDir: ['build', 'src'],
+            baseDir: ['build'],
             },
             tunnel: false,
             host: 'localhost',
