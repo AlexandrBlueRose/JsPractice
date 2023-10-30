@@ -1,6 +1,6 @@
-@use '../global/base';
-@use '../global/fonts';
-@use '../global/mixins';
+@use "../global/base";
+@use "../global/fonts";
+@use "../global/mixins";
 
 //=========================COMMON STYLES=======================================
 *,
@@ -27,7 +27,8 @@ p {
   }
 }
 
-span, .span {
+span,
+.span {
   color: $black;
   word-break: break-all;
 }
@@ -71,9 +72,9 @@ strong {
 li {
   font: font(400, $fontSizeM);
   margin-left: calc($major * 3.75);
-  &::marker{
-	  color: $black;
-	  font-size: $fontSizeS; 
+  &::marker {
+    color: $black;
+    font-size: $fontSizeS;
   }
   @include mq($md) {
     font: font(400, $fontSizeS);
@@ -93,7 +94,8 @@ a {
   cursor: url(/src/img/pointing.svg), pointer;
 }
 
-input[placeholder], textarea[placeholder] {
+input[placeholder],
+textarea[placeholder] {
   font: font(400, $fontSizeS, 140%);
 }
 
@@ -121,7 +123,7 @@ input[placeholder], textarea[placeholder] {
   border: 0;
 }
 
-.container-header-logo{
+.container-header-logo {
   display: flex;
   gap: $major;
   align-items: center;
@@ -162,7 +164,6 @@ input[placeholder], textarea[placeholder] {
     }
   }
   &__title {
-    
     margin-top: 0;
     margin-bottom: calc($major * 5);
     @include mq($md) {
@@ -173,11 +174,11 @@ input[placeholder], textarea[placeholder] {
 
 .filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0.45583333333%, 547px));//todo
+  grid-template-columns: repeat(auto-fit, minmax(0.45583333333%, 547px)); //todo
   gap: calc($major * 2) calc($major * 4);
   align-items: flex-end;
   @include mq($md) {
-    gap: calc($major *3);
+    gap: calc($major * 3);
   }
 
   &__label {
@@ -231,7 +232,7 @@ input[placeholder], textarea[placeholder] {
     @include mq($xl) {
       order: 2;
     }
-    @include mq($sm){
+    @include mq($sm) {
       width: 100%;
     }
   }
@@ -258,11 +259,11 @@ input[placeholder], textarea[placeholder] {
       outline: none;
       box-shadow: none;
       border: calc($minor/4) solid $blue;
-    }    
+    }
   }
 
   &__input_down {
-    &::after{
+    &::after {
       content: "";
       position: absolute;
       background-image: url(/src/img/chevronDown.svg);
@@ -278,7 +279,7 @@ input[placeholder], textarea[placeholder] {
   }
 
   &__input_up {
-    &::after{
+    &::after {
       content: "";
       position: absolute;
       background-image: url(/src/img/chevronUp.svg);
@@ -333,7 +334,7 @@ input[placeholder], textarea[placeholder] {
     font: font(400, $fontSizeS, 140%);
     color: $black;
     cursor: url(/src/img/pointing.svg), pointer;
-    &:hover{
+    &:hover {
       color: $baseColor;
       background-color: $blue;
     }
@@ -352,7 +353,7 @@ input[placeholder], textarea[placeholder] {
 
 .blue-button {
   height: calc($minor * 11);
-  padding: $major calc($major *4);
+  padding: $major calc($major * 4);
   justify-content: center;
   border: 0;
   border-radius: $minor;
@@ -361,7 +362,7 @@ input[placeholder], textarea[placeholder] {
   text-align: center;
   font: font(700, $button, 140%);
   cursor: url(/src/img/pointing.svg), pointer;
-  &:hover{
+  &:hover {
     background-color: $blueHover;
   }
 }
@@ -436,8 +437,8 @@ input[placeholder], textarea[placeholder] {
     @-moz-document url-prefix() {
       width: auto;
     }
-    @media screen and (-webkit-min-device-pixel-ratio:0) {
-        width: auto;
+    @media screen and (-webkit-min-device-pixel-ratio: 0) {
+      width: auto;
     }
   }
   &__logo_hide {
@@ -462,7 +463,13 @@ input[placeholder], textarea[placeholder] {
   &__description-footer {
     position: absolute;
     top: 90%;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.05) 12.82%, rgba(255, 255, 255, 0.98) 50.51%, rgba(255, 255, 255, 0.98) 56.86%, #FFF 88.19%);
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.05) 12.82%,
+      rgba(255, 255, 255, 0.98) 50.51%,
+      rgba(255, 255, 255, 0.98) 56.86%,
+      #fff 88.19%
+    );
     width: 100%;
     height: calc($minor * 25);
     opacity: 1;
@@ -586,7 +593,7 @@ input[placeholder], textarea[placeholder] {
   &__button-description {
     font: font(400, $fontSizeM, 140%);
     @include mq($md) {
-      font: font(400, $fontSizeS, 140%);;
+      font: font(400, $fontSizeS, 140%);
     }
   }
   &__legend {
@@ -662,7 +669,7 @@ input[placeholder], textarea[placeholder] {
       opacity: 0.2;
       background: $baseColor;
       width: calc($minor * 18);
-      top: 100%;     
+      top: 100%;
     }
     &:nth-child(n) {
       text-align: end;

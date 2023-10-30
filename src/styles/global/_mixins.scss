@@ -3,19 +3,19 @@
 /// @param {text} $from
 ///   Обязательный параметр ширины экрана в px, если задан единственным, то идет как max-width.
 /// @param {text} $to
-///   Необязательный параметр ширины экрана в px, если задан, 
+///   Необязательный параметр ширины экрана в px, если задан,
 ///   то идет как max-width, а `$from` идет как min-width
 /// @author Alexandr Khaidarov
 @mixin mq($from, $to: false) {
-    @if $to {
-      @media (min-width: $from) and (max-width: $to) {
-        @content;
-      }
-    } @else {
-      @media (max-width: $from) {
-        @content;
-      }
+  @if $to {
+    @media (min-width: $from) and (max-width: $to) {
+      @content;
     }
+  } @else {
+    @media (max-width: $from) {
+      @content;
+    }
+  }
 }
 
 /// Функция для краткой записи параметров шрифта.
@@ -29,6 +29,11 @@
 /// @param {text} $fontFamily
 ///   Семейство шрифта.
 /// @return {text} входные данные для свойства font.
-@function font($fontWeight ,$fontSize, $lineHeight: normal, $fontFamily: $fontFamily) {
-    @return #{$fontWeight #{$fontSize}/$lineHeight $fontFamily};
+@function font(
+  $fontWeight,
+  $fontSize,
+  $lineHeight: normal,
+  $fontFamily: $fontFamily
+) {
+  @return #{$fontWeight #{$fontSize}/ $lineHeight $fontFamily};
 }
