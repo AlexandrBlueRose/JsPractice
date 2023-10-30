@@ -54,77 +54,80 @@
         </div>
     </header>
 
-        <main class="main">
-            <section class="main__card-section">
-                <h2 class="main__heading-cards">
-                    Card Section
-                </h2>
-                <div class="main__card-list">
+        <main>
+            <section class="card-block">
+				<div class="container">
+					<div class="card-block__content">
+                        <h2 class="card-block__heading-cards visually-hidden">
+                            Card Section
+                        </h2>
+						<div class="card-block__list" lang="ru">
+						</div>
+						<button class="blue-button card-block__load-card">Show more</button>
+					</div>
+				</div>
+			</section>
 
-                </div>
-                <button class="main__card-load">Load more</button>
-            </section>
+            <section class="request-block">
+				<div class="container">
+					<div class="request-block__content">
+                        <h2 class="main__heading-form visually-hidden">
+                            Form Section
+                        </h2>
+						<form class="form request-block__form" method="get">
+                            <fieldset class="form__fieldset">
+                                <legend class="form__legend">
+                                    Leave a request
+                                </legend>
+                                <p class="form__description">
+                                    We will advise you and help you start a new project
+							    </p>
+							    <label class="select-wrapper form__label">
+								    Your name
+								    <input class="select-wrapper__input" type="text" name="name" placeholder="Please introduce yourself" required />
+							    </label>
+							    <label class="select-wrapper form__label">
+								    Email
+								    <input class="select-wrapper__input" type="text" name="email" placeholder="ivanov@gmail.com" pattern="^.+@[^\.].*\.[a-z]{2,}$" required />
+							    </label>
+							    <label class="select-wrapper form__label">
+								    Phone number
+								    <input class="inputPhone select-wrapper__input" type="text" name="phoneNumber" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}\s\d{4}" placeholder="+7 (123) 456 7891" required />
+							    </label>
+							    <label class="select-wrapper form__label">
+								    Comment
+								    <textarea name="textArea" class="form__text-area select-wrapper__input" cols="30" rows="10" placeholder="Message text"></textarea>
+							    </label>
+                            </fieldset>
+							<input class="blue-button form__button" value="Send" type="submit" />
+						</form>
 
-            <section class="main__form-section">
-                <h2 class="main__heading-form--hide">
-                    Form Section
-                </h2>
-                <form action="" class="form main__form">
-                    <fieldset class="form__fieldset">
-                        <legend class="form__legend">
-                            Leave a request
-                        </legend>
-                        <div class="form__description">
-                            We will advise you and help you start  a new project
-                        </div>
-                        <div class="form__input-list">
-                            <label for="">
-                                Your name
-                                <input type="text">
-                            </label>
-
-                            <label for="">
-                                Your email
-                                <input type="text">
-                            </label>
-
-                            <label for="">
-                                Phone number
-                                <input type="text">
-                            </label>
-
-                            <label for="">
-                                Comment
-                                <input type="text">
-                            </label>
-                        </div>
-                    </fieldset>
-
-
-                    <button class="main__submit-form">Send</button>
-                    <div class="main__submin-description">
-                        By clicking "Send" you confirm your consent to the
-                        <span class="main__submin-span">
-                            processing of personal data
-                        </span>
-                    </div>
-
-                </form>
-
-
-            </section>
+						<p class="form__button-description">
+							By clicking "Send" you confirm your consent to the <br />
+							<a class="link" href="">
+								processing of personal data
+							</a>
+						</p>
+					</div>
+				</div>
+			</section>
 
         </main>
 
         <footer class="footer">
-            <div class="footer__contacts">
+			<div class="container">
+				<div class="footer__content">
+					<div class="footer__contacts">
+						<a href="tel:+74993816669" class="footer__tel">+7 499 391-66-69</a>
+						<a href="mailto:mail@greensight.ru" class="footer__mail">mail@greensight.ru</a>
+					</div>
 
-            </div>
-
-            <div class="footer__location">
-
-            </div>
-        </footer>
-        <script src="./js/script.js"></script>
+					<div class="footer__address">
+						<a href="https://yandex.ru/maps/-/CDUT6ZMu" class="footer__address">322A, 2nd Floor, Zelenograd, Moscow, Russia</a>
+						<a href="" class="footer__directions">Directions</a>
+					</div>
+				</div>
+			</div>
+		</footer>
 </body>
 </html>
