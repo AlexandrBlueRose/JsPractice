@@ -125,17 +125,26 @@ class CardsData {
   get cards() {
     return this.#cards;
   }
+
+  loadCardData(params = {}) {
+    
+    if (INDEX_CARD_PER_PAGE * 5 <= this.#maxCardLoading) {
+      const cardHandler = new CardsHandler();
+      cardHandler.cardAppendOnRoot(this.#cards, this.#numCardInPage, index, params);
+      INDEX_CARD_PER_PAGE++;
+    }
+  }
 }
 
 class CardsHandler {
 
-  async cardApiLoadData(perPage, page, params = {}){
+  async cardApiLoadData(cards, perPage, page, params = {}){// ToDo переделать async await без вызовов then и наладить вызов другого fetch
     let param = '';
-    params.map((key, value) => {
+    isEmptyObject(params) ? params = '' : params.map((key, value) => {
       param += '&' + key + '=' + value;
     });
 
-    await fetch(`https://api.hh.ru/vacancies?per_page=${perPage}&page=${page}${params}`)
+    const cardsData = await fetch(`https://api.hh.ru/vacancies?per_page=${perPage}&page=${page}${params}`)
     .then(function(response) {
       if (response.ok) {
         return response.json();
@@ -143,21 +152,19 @@ class CardsHandler {
         throw new Error('Ошибка при выполнении запроса');
       }
     })
-    .then(function(data) {
-      return data.items.map(item => {//Todo
-        let cardsDefinition = cardCompletionAbstract(item);
-      });
-      //data.items.map(item => {
-      //  return cardFullApiLoadData(item.id)
+    .then(function(data, this) {
+      //return data.items.map(item => {//Todo
+      //  let cardsDefinition = cardCompletionAbstract(item);
       //});
-    })
-    .catch((error) => {
-      console.log(error);
+        data.items.map(item => {
+          cards.push(cardFullApiLoadData(item.id));
+        });
+      return cards;
     });
   }
 
   async cardFullApiLoadData(id) {
-    const response = await fetch(`https://api.hh.ru/vacancies/${id}`)
+    const cardData = await fetch(`https://api.hh.ru/vacancies/${id}`)
    .then(function(response) {
     if (response.ok) {
       return response.json();
@@ -167,6 +174,7 @@ class CardsHandler {
    }).then(function(data) {
     return cardCompletionAbstract(data);
    });
+   return cardData;
   }
 
   cardCompletionAbstract(item) {
@@ -181,11 +189,15 @@ class CardsHandler {
     return card;
   }
 
-  cardAppendOnRoot(cards, elem, perPage, page, params = {}){// ToDo вытащить? и вызывать с вызовом загрузки данных  и пройтись циклом для вставки данных в DOM
-    elem;
+  cardAppendOnRoot(cards, perPage, page, params = {}){// ToDo вытащить? и вызывать с вызовом загрузки данных  и пройтись циклом для вставки данных в DOM
+    console.log('test');
+    return this.cardApiLoadData(cards, perPage, page, params)
   }
 }
 
+
+
+function isEmptyObject(obj) {return Object.keys(obj).length === 0;}
 function addListener(btn, func) { 
   if (btn.clickHandler) {
       btn.removeEventListener('click', btn.clickHandler);
@@ -407,6 +419,10 @@ async function apiLoadCard(page, param1, param2) {
 }
 
 window.onload = () => {
+
+  let card = new CardsData();
+console.log("ok")
+card.loadCardData()
   const loadCards = document.querySelector('.card-block__load-card');
   const filterCards = document.querySelector('.filters__search');
   const filtersClear = document.querySelector('.filters__clear-filters-input');
