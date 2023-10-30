@@ -91,7 +91,7 @@ input:valid:not(:placeholder-shown) {
 a {
   text-decoration: none;
   color: inherit;
-  cursor: url(/src/img/pointing.svg), pointer;
+  cursor: url(../../img/pointing.svg), pointer;
 }
 
 input[placeholder],
@@ -193,11 +193,11 @@ textarea[placeholder] {
   &__clear-filters {
     position: relative;
     width: max-content;
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
     &::before {
       content: "";
       position: absolute;
-      background-image: url(/src/img/close.svg);
+      background-image: url(../../img/close.svg);
       height: calc($major * 2);
       width: calc($major * 2);
       background-repeat: no-repeat;
@@ -218,7 +218,7 @@ textarea[placeholder] {
 
   &__clear-filters-input {
     padding-left: calc($minor * 5);
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
   }
   &__clear-filters_hide {
     display: none;
@@ -227,7 +227,7 @@ textarea[placeholder] {
   &__search {
     width: max-content;
     padding: $major calc($major * 4);
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
 
     @include mq($xl) {
       order: 2;
@@ -254,7 +254,7 @@ textarea[placeholder] {
     background: $baseColor;
     color: $grey600;
     text-align: left;
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
     &:focus {
       outline: none;
       box-shadow: none;
@@ -266,7 +266,7 @@ textarea[placeholder] {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(/src/img/chevronDown.svg);
+      background-image: url(../../img/chevronDown.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
@@ -282,7 +282,7 @@ textarea[placeholder] {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(/src/img/chevronUp.svg);
+      background-image: url(../../img/chevronUp.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
@@ -318,7 +318,7 @@ textarea[placeholder] {
     width: 100%;
     z-index: 1;
     top: calc($minor * 16.75);
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
   }
 
   &__list_visible {
@@ -333,7 +333,7 @@ textarea[placeholder] {
     height: calc($major * 5);
     font: font(400, $fontSizeS, 140%);
     color: $black;
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
     &:hover {
       color: $baseColor;
       background-color: $blue;
@@ -348,7 +348,7 @@ textarea[placeholder] {
   font: font(500, $fontSizeM, 145%);
   color: $blue;
   text-decoration: none;
-  cursor: url(/src/img/pointing.svg), pointer;
+  cursor: url(../../img/pointing.svg), pointer;
 }
 
 .blue-button {
@@ -361,7 +361,7 @@ textarea[placeholder] {
   color: $baseColor;
   text-align: center;
   font: font(700, $button, 140%);
-  cursor: url(/src/img/pointing.svg), pointer;
+  cursor: url(../../img/pointing.svg), pointer;
   &:hover {
     background-color: $blueHover;
   }
@@ -491,7 +491,7 @@ textarea[placeholder] {
     background-color: $grey900;
     border: 0;
     border-radius: $minor;
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
     @include mq($md) {
       margin-left: 0;
       width: 100%;
@@ -516,21 +516,21 @@ textarea[placeholder] {
 
   &__details {
     margin: 0 auto;
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
   }
 
   &__details_down {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(/src/img/chevronDownBlue.svg);
+      background-image: url(../../img/chevronDownBlue.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
       width: calc($major * 2);
       height: calc($major * 2);
       transform: translateY(32%);
-      cursor: url(/src/img/pointing.svg), pointer;
+      cursor: url(../../img/pointing.svg), pointer;
     }
   }
 
@@ -538,14 +538,14 @@ textarea[placeholder] {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(/src/img/chevronUpBlue.svg);
+      background-image: url(../../img/chevronUpBlue.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
       width: calc($major * 2);
       height: calc($major * 2);
       transform: translateY(32%);
-      cursor: url(/src/img/pointing.svg), pointer;
+      cursor: url(../../img/pointing.svg), pointer;
     }
   }
 }
@@ -581,14 +581,14 @@ textarea[placeholder] {
   &__button {
     padding: $major calc($major * 4);
     width: clamp(calc($major * 36), 100%, calc($major * 48.25));
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
     margin-top: calc($major * 2);
   }
 
   &__text-area {
     height: calc($major * 11);
     resize: none;
-    cursor: url(/src/img/pointing.svg), pointer;
+    cursor: url(../../img/pointing.svg), pointer;
   }
   &__button-description {
     font: font(400, $fontSizeM, 140%);
