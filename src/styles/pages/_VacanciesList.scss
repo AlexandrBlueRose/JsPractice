@@ -23,7 +23,7 @@ body {
 p {
   font: font(400, $fontSizeM, 140%);
   @include mq($md) {
-    font: font(400, $fontSizeL, 140%);
+    font: font(400, $fontSizeS, 140%);
   }
 }
 
@@ -174,7 +174,7 @@ textarea[placeholder] {
 
 .filters {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(0.45583333333%, 547px)); //todo
+  grid-template-columns: repeat(auto-fit, minmax(0.45583333333%, 547px));
   gap: calc($major * 2) calc($major * 4);
   align-items: flex-end;
   @include mq($md) {
@@ -202,7 +202,10 @@ textarea[placeholder] {
       width: calc($major * 2);
       background-repeat: no-repeat;
       background-position: center;
-      top: calc(18%);
+      bottom: calc(18%);
+      @include mq($md) {
+        bottom: 0;
+      }
     }
     ::after {
       content: "";
@@ -345,10 +348,13 @@ textarea[placeholder] {
   background-color: transparent;
   border: 0;
   width: max-content;
-  font: font(500, $fontSizeM, 145%);
+  font: font(400, $fontSizeM, 145%);
   color: $blue;
   text-decoration: none;
   cursor: url(../../img/pointing.svg), pointer;
+  @include mq($md) {
+    font: font(400, $fontSizeS, 14%);
+  }
 }
 
 .blue-button {
@@ -507,6 +513,7 @@ textarea[placeholder] {
     font-size: $fontSizeM;
     flex-wrap: wrap;
     padding-bottom: calc($minor * 3);
+    row-gap: calc($minor * 5);
     @include mq($md) {
       gap: $major;
       flex-direction: column;
@@ -603,6 +610,9 @@ textarea[placeholder] {
     @include mq($md) {
       margin-bottom: calc($major * 3);
     }
+  }
+  &__link {
+    font: font(500, $fontSizeM, 140%);
   }
   &__description {
     margin-bottom: calc($major * 3);
