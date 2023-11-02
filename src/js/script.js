@@ -62,8 +62,8 @@ class Card {
       <div class = "card__body">
         <div class = "card__title">
           <div class = "card__header-logo container-header-logo">
-            <h4 class = "card__position-title">${this.#title}</h4>
-            <img class = "card__logo ${this.#classOption}" src = "${this.#logoUrl}" alt = 'Company logo'>
+            <h3 class = "card__position-title">${this.#title}</h3>
+            <img class = "card__logo ${this.#classOption}" src = "${this.#logoUrl}" alt = 'Company logo' height = "40px" width = "auto">
           </div>
           <button class = "card__respond-button">Respond</button>
         </div>
@@ -98,7 +98,7 @@ class Card {
           <div class = "card__description-footer">
           </div>
         </div>
-        <div class = "card__details card__details_down">
+        <div class = "card__details card__details--down">
           <button class = "link card__details-button" onClick = "detailsDescriptionEvent(this)">More details</button>
         </div>
       </div>
@@ -193,7 +193,7 @@ class CardsHandler {
   }
 
   cardCompletionAbstract(item) {
-    let card = new Card(item.id, item?.name, item?.description, item.employer?.logo_urls?.original, 
+    let card = new Card(item.id, item?.name, item?.description, item.employer?.logo_urls?.['240'] , 
         {
           form: item?.employment ? item.employment.name : "Not Selected", 
           company: item?.employer?.name ? item.employer.name : "Not Selected",
@@ -230,12 +230,12 @@ function addListener(elem, func, event) {
 }
 
 function resetArrowImg(elem) {
-  if (elem.classList.contains('select-wrapper__input_down')) {
-    elem.classList.add('select-wrapper__input_up');
-    elem.classList.remove('select-wrapper__input_down');
+  if (elem.classList.contains('select-wrapper__input--down')) {
+    elem.classList.add('select-wrapper__input--up');
+    elem.classList.remove('select-wrapper__input--down');
   } else {
-    elem.classList.remove('select-wrapper__input_up');
-    elem.classList.add('select-wrapper__input_down');
+    elem.classList.remove('select-wrapper__input--up');
+    elem.classList.add('select-wrapper__input--down');
   }
 }
 
@@ -318,30 +318,30 @@ function mask(event) {
 
 const detailsDescriptionEvent = ( cardButton ) => {
   const card = cardButton.closest('.card');
-  card.querySelector('.card__description-footer').classList.toggle('card__description-footer_hide');
-  card.querySelector('.card__description').classList.toggle('card__description_full');
+  card.querySelector('.card__description-footer').classList.toggle('card__description-footer--hide');
+  card.querySelector('.card__description').classList.toggle('card__description--full');
   const cardDetails = card.querySelector('.card__details');
   if (cardButton.innerText == 'More details') {
     cardButton.innerHTML = 'Less details';
-    cardDetails.classList.add('card__details_up');
-    cardDetails.classList.remove('card__details_down');
+    cardDetails.classList.add('card__details--up');
+    cardDetails.classList.remove('card__details--down');
   } else {
     cardButton.innerHTML = 'More details';
-    cardDetails.classList.remove('card__details_up');
-    cardDetails.classList.add('card__details_down');
+    cardDetails.classList.remove('card__details--up');
+    cardDetails.classList.add('card__details--down');
   }
 }
 
 const loadCardsEvent = ( cardData, loadCardButton ) => ( event ) => {
   if (cardData.getIndexPage() * cardData.getNumCardInPage() >= cardData.getMaxCardLoading()) {
-    document.querySelector('.card-block__load-card').classList.add('card-block__load-card_hide');
+    document.querySelector('.card-block__load-card').classList.add('card-block__load-card--hide');
     cardData.indexPageReset();
     document.querySelector('.card-block__load-card').classList.add('visually-hidden');
   } else {
     let params = {};
     loadCardButton.disabled = true;
     loadCardDataWithParams(params, cardData);
-    setTimeout(() => {//todo
+    setTimeout(() => {
       loadCardButton.disabled = false;
     }, 3000);
   }
@@ -382,25 +382,25 @@ const filterCardClearEvent = (cardData) => ( event ) => {
     param.setAttribute('data-eventual', 'NotSelected');
     param.setAttribute('data-preliminary', 'NotSelected');
     param.innerText = 'Not selected';
-    param.classList.remove('select-wrapper__input_selected');
+    param.classList.remove('select-wrapper__input--selected');
   }
   document.querySelector('.card-block__list').innerText = '';
-  document.querySelector('.filters__clear-filters').classList.add('filters__clear-filters_hide');
+  document.querySelector('.filters__clear-filters').classList.add('filters__clear-filters--hide');
   loadCardDataWithParams({}, cardData);
 }
 
 const filterButtonToggleOptionSelectedVisibleEvent = (selectList, filterButton) => ( event ) => {
-  selectList.classList.toggle('select-wrapper__list_visible');
+  selectList.classList.toggle('select-wrapper__list--visible');
   filterButton.blur();
 }
 
 const filterResetArrowEvent = (filter, listFilters)  => ( event ) => {
-    if(filter.classList.contains('select-wrapper__input_up')){
+    if(filter.classList.contains('select-wrapper__input--up')){
       resetArrowImg(filter);
       Object.entries(listFilters).filter(currentFilter => filter !== currentFilter[1])
       .forEach(currentFilter => {
-        currentFilter?.classList.remove('select-wrapper__input_up');
-        currentFilter?.classList.add('select-wrapper__input_down');
+        currentFilter?.classList.remove('select-wrapper__input--up');
+        currentFilter?.classList.add('select-wrapper__input--down');
       });
       
     } else{
@@ -414,27 +414,27 @@ const selectListItemEvent = (selectList, filterButton, item) => ( event ) => {
   filterButton.setAttribute('data-eventual', 'NotSelected');
   filterButton.setAttribute('data-Preliminary', item.getAttribute('data-value'));
   filterButton.blur();
-  filterButton.classList.add('select-wrapper__input_selected');
-  filterButton.classList.remove('select-wrapper__input_up');
-  filterButton.classList.add('select-wrapper__input_down');
-  selectList.classList.remove('select-wrapper__list_visible');
-  document.querySelector('.filters__clear-filters').classList.remove('filters__clear-filters_hide');
+  filterButton.classList.add('select-wrapper__input--selected');
+  filterButton.classList.remove('select-wrapper__input--up');
+  filterButton.classList.add('select-wrapper__input--down');
+  selectList.classList.remove('select-wrapper__list--visible');
+  document.querySelector('.filters__clear-filters').classList.remove('filters__clear-filters--hide');
 }
 
 const listItemsHideClickEvent = (selectList, filterButton)  => ( event ) => {
   if (event.target !== filterButton) {
-    selectList.classList.remove('select-wrapper__list_visible');
-    filterButton.classList.add('select-wrapper__input_active');
-    filterButton.classList.remove('select-wrapper__input_up');
-    filterButton.classList.add('select-wrapper__input_down');
+    selectList.classList.remove('select-wrapper__list--visible');
+    filterButton.classList.add('select-wrapper__input--active');
+    filterButton.classList.remove('select-wrapper__input--up');
+    filterButton.classList.add('select-wrapper__input--down');
   }
 }
 
 const listItemsHideKeydownEvent = (selectList, filterButton)  => ( event ) => {
   if (event.key === 'Tab' || event.key === 'Escape') {
-    selectList.classList.remove('select-wrapper__list_visible');
-    filterButton.classList.remove('select-wrapper__input_up');
-    filterButton.classList.add('select-wrapper__input_down');
+    selectList.classList.remove('select-wrapper__list--visible');
+    filterButton.classList.remove('select-wrapper__input--up');
+    filterButton.classList.add('select-wrapper__input--down');
   }
 }
 

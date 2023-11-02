@@ -14,10 +14,10 @@
 body {
   margin: 0;
   font: font(normal, $fontSizeXS);
-  color: $black;
+  color: $cl-black;
   min-width: $minWidth;
   overflow-x: hidden;
-  background: $baseColor;
+  background: $cl-baseColor;
 }
 
 p {
@@ -29,7 +29,7 @@ p {
 
 span,
 .span {
-  color: $black;
+  color: $cl-black;
   word-break: break-all;
 }
 
@@ -62,7 +62,7 @@ h4 {
 }
 
 strong {
-  color: $black;
+  color: $cl-black;
   font: font(500, $fontSizeM, 140%);
   @include mq($md) {
     font: font(500, $fontSizeS, 140%);
@@ -73,7 +73,7 @@ li {
   font: font(400, $fontSizeM);
   margin-left: calc($major * 3.75);
   &::marker {
-    color: $black;
+    color: $cl-black;
     font-size: $fontSizeS;
   }
   @include mq($md) {
@@ -91,7 +91,7 @@ input:valid:not(:placeholder-shown) {
 a {
   text-decoration: none;
   color: inherit;
-  cursor: url(../../img/pointing.svg), pointer;
+  cursor: url(../../img/svg/pointing.svg), pointer;
 }
 
 input[placeholder],
@@ -137,7 +137,7 @@ textarea[placeholder] {
 }
 
 .condition-gray {
-  color: $grey700;
+  color: $cl-grey700;
   display: flex;
   gap: $major;
   font: font(500, $fontSizeM);
@@ -193,11 +193,11 @@ textarea[placeholder] {
   &__clear-filters {
     position: relative;
     width: max-content;
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
     &::before {
       content: "";
       position: absolute;
-      background-image: url(../../img/close.svg);
+      background-image: url(../../img/svg/close.svg);
       height: calc($major * 2);
       width: calc($major * 2);
       background-repeat: no-repeat;
@@ -212,7 +212,7 @@ textarea[placeholder] {
       position: absolute;
       height: calc($minor/4);
       opacity: 0.2;
-      background: $blue;
+      background: $cl-blue;
       width: calc($minor * 20.5);
       top: calc(92%);
       left: 19%;
@@ -221,16 +221,16 @@ textarea[placeholder] {
 
   &__clear-filters-input {
     padding-left: calc($minor * 5);
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
   }
-  &__clear-filters_hide {
+  &__clear-filters--hide {
     display: none;
   }
 
   &__search {
     width: max-content;
     padding: $major calc($major * 4);
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
 
     @include mq($xl) {
       order: 2;
@@ -252,24 +252,24 @@ textarea[placeholder] {
     padding: $minor calc($minor * 3);
     height: calc($minor * 11);
     font: font(400, $fontSizeS, 140%);
-    border: calc($minor/4) solid $grey400;
+    border: calc($minor/4) solid $cl-grey400;
     border-radius: $minor;
-    background: $baseColor;
-    color: $grey600;
+    background: $cl-baseColor;
+    color: $cl-grey600;
     text-align: left;
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
     &:focus {
       outline: none;
       box-shadow: none;
-      border: calc($minor/4) solid $blue;
+      border: calc($minor/4) solid $cl-blue;
     }
   }
 
-  &__input_down {
+  &__input--down {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(../../img/chevronDown.svg);
+      background-image: url(../../img/svg/chevronDown.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
@@ -281,11 +281,11 @@ textarea[placeholder] {
     }
   }
 
-  &__input_up {
+  &__input--up {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(../../img/chevronUp.svg);
+      background-image: url(../../img/svg/chevronUp.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
@@ -297,14 +297,14 @@ textarea[placeholder] {
     }
   }
 
-  &__input_selected {
-    color: $black;
+  &__input--selected {
+    color: $cl-black;
   }
 
-  &__input_active {
+  &__input--active {
     outline: none;
     box-shadow: none;
-    border: calc($minor/4) solid $grey400;
+    border: calc($minor/4) solid $cl-grey400;
   }
 
   &__list {
@@ -313,7 +313,7 @@ textarea[placeholder] {
     margin: 0;
     padding: 0;
     list-style-type: none;
-    background-color: $baseColor;
+    background-color: $cl-baseColor;
     box-shadow: $Box;
     overflow: hidden;
     border-radius: $minor;
@@ -321,10 +321,10 @@ textarea[placeholder] {
     width: 100%;
     z-index: 1;
     top: calc($minor * 16.75);
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
   }
 
-  &__list_visible {
+  &__list--visible {
     display: block;
   }
 
@@ -335,11 +335,11 @@ textarea[placeholder] {
     padding: $major calc($minor * 3);
     height: calc($major * 5);
     font: font(400, $fontSizeS, 140%);
-    color: $black;
-    cursor: url(../../img/pointing.svg), pointer;
+    color: $cl-black;
+    cursor: url(../../img/svg/pointing.svg), pointer;
     &:hover {
-      color: $baseColor;
-      background-color: $blue;
+      color: $cl-baseColor;
+      background-color: $cl-blue;
     }
   }
 }
@@ -349,11 +349,11 @@ textarea[placeholder] {
   border: 0;
   width: max-content;
   font: font(400, $fontSizeM, 145%);
-  color: $blue;
+  color: $cl-blue;
   text-decoration: none;
-  cursor: url(../../img/pointing.svg), pointer;
+  cursor: url(../../img/svg/pointing.svg), pointer;
   @include mq($md) {
-    font: font(400, $fontSizeS, 14%);
+    font: font(400, $fontSizeS, 140%);
   }
 }
 
@@ -363,13 +363,18 @@ textarea[placeholder] {
   justify-content: center;
   border: 0;
   border-radius: $minor;
-  background-color: $blue;
-  color: $baseColor;
+  background-color: $cl-blue;
+  color: $cl-baseColor;
   text-align: center;
   font: font(700, $button, 140%);
-  cursor: url(../../img/pointing.svg), pointer;
+  cursor: url(../../img/svg/pointing.svg), pointer;
   &:hover {
-    background-color: $blueHover;
+    background-color: $cl-blueHover;
+  }
+  &:disabled {
+    cursor: default;
+    background-color: $cl-blueHover;
+    opacity: 0.7;
   }
 }
 //=========================HEADER END==========================================
@@ -404,7 +409,7 @@ textarea[placeholder] {
     border-radius: calc($major * 2);
     align-items: start;
     flex-direction: column;
-    background-color: $baseColor;
+    background-color: $cl-baseColor;
     box-shadow: $BoxLight;
     @include mq($md) {
       gap: calc($major * 2);
@@ -427,7 +432,7 @@ textarea[placeholder] {
   }
 
   &__position-title {
-    color: $black;
+    color: $cl-black;
     word-wrap: break-word;
     @include mq($md) {
       order: 0;
@@ -435,8 +440,6 @@ textarea[placeholder] {
   }
 
   &__logo {
-    width: max-content;
-    height: calc($major * 5);
     @include mq($md) {
       order: -1;
     }
@@ -447,7 +450,7 @@ textarea[placeholder] {
       width: auto;
     }
   }
-  &__logo_hide {
+  &__logo--hide {
     display: none;
   }
 
@@ -461,7 +464,7 @@ textarea[placeholder] {
     }
   }
 
-  &__description_full {
+  &__description--full {
     overflow: unset;
     max-height: max-content;
   }
@@ -482,7 +485,7 @@ textarea[placeholder] {
     transition: 0.5s;
   }
 
-  &__description-footer_hide {
+  &__description-footer--hide {
     height: 0;
     opacity: 0;
     transition: 0.5s;
@@ -492,18 +495,18 @@ textarea[placeholder] {
     height: calc($minor * 11);
     padding: $major calc($major * 4);
     font: font(700, $button, 140%);
-    color: $baseColor;
+    color: $cl-baseColor;
     margin-left: auto;
-    background-color: $grey900;
+    background-color: $cl-grey900;
     border: 0;
     border-radius: $minor;
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
     @include mq($md) {
       margin-left: 0;
       width: 100%;
     }
     &:hover {
-      background-color: $black;
+      background-color: $cl-black;
     }
   }
 
@@ -523,36 +526,36 @@ textarea[placeholder] {
 
   &__details {
     margin: 0 auto;
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
   }
 
-  &__details_down {
+  &__details--down {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(../../img/chevronDownBlue.svg);
+      background-image: url(../../img/svg/chevronDownBlue.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
       width: calc($major * 2);
       height: calc($major * 2);
       transform: translateY(32%);
-      cursor: url(../../img/pointing.svg), pointer;
+      cursor: url(../../img/svg/pointing.svg), pointer;
     }
   }
 
-  &__details_up {
+  &__details--up {
     &::after {
       content: "";
       position: absolute;
-      background-image: url(../../img/chevronUpBlue.svg);
+      background-image: url(../../img/svg/chevronUpBlue.svg);
       background-repeat: no-repeat;
       background-position: center;
       background-size: 100%;
       width: calc($major * 2);
       height: calc($major * 2);
       transform: translateY(32%);
-      cursor: url(../../img/pointing.svg), pointer;
+      cursor: url(../../img/svg/pointing.svg), pointer;
     }
   }
 }
@@ -562,7 +565,7 @@ textarea[placeholder] {
 //=========================FORM BLOCK==========================================
 
 .request-block {
-  background-color: $grey100;
+  background-color: $cl-grey100;
   text-align: center;
   &__form {
     display: flex;
@@ -582,20 +585,23 @@ textarea[placeholder] {
 }
 
 .form {
+  @-moz-document url-prefix() {
+    position: relative;
+  }
   &__label {
     width: clamp(calc($minor * 72), 100%, calc($minor * 147.5));
   }
   &__button {
     padding: $major calc($major * 4);
     width: clamp(calc($major * 36), 100%, calc($major * 48.25));
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
     margin-top: calc($major * 2);
   }
 
   &__text-area {
     height: calc($major * 11);
     resize: none;
-    cursor: url(../../img/pointing.svg), pointer;
+    cursor: url(../../img/svg/pointing.svg), pointer;
   }
   &__button-description {
     font: font(400, $fontSizeM, 140%);
@@ -610,6 +616,12 @@ textarea[placeholder] {
     @include mq($md) {
       margin-bottom: calc($major * 3);
     }
+    @-moz-document url-prefix() {
+      position: absolute;
+      left: 50%;
+      top: - calc($minor * 3);
+      transform: translate(-50%, 0);
+    }
   }
   &__link {
     font: font(500, $fontSizeM, 140%);
@@ -619,6 +631,9 @@ textarea[placeholder] {
     font: font(400, $fontSizeL, 140%);
     @include mq($md) {
       font: font(400, $fontSizeM, 140%);
+    }
+    @-moz-document url-prefix() {
+      padding-top: calc($minor * 12)
     }
   }
   &__fieldset {
@@ -638,14 +653,14 @@ textarea[placeholder] {
 //=========================FOOTER BLOCK========================================
 
 .footer {
-  background-color: $grey900;
+  background-color: $cl-grey900;
   &__content {
     display: flex;
     flex-wrap: wrap;
     row-gap: calc($minor * 5);
     width: 100%;
     padding: calc($major * 5) 0;
-    color: $baseColor;
+    color: $cl-baseColor;
   }
 
   &__contacts {
@@ -677,7 +692,7 @@ textarea[placeholder] {
       position: absolute;
       height: calc($minor/4);
       opacity: 0.2;
-      background: $baseColor;
+      background: $cl-baseColor;
       width: calc($minor * 18);
       top: 100%;
     }
