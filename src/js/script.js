@@ -197,7 +197,7 @@ class Card {
  * Класс описывающий настройки выгрузки карточек.
  * @class
  */
-class CardsData {
+class ApiSettings {
 
     /** 
      * Набор карточек. 
@@ -336,8 +336,8 @@ class CardsHandler {
             }
         }
         try {
-            const cardsData = await fetch(`https://api.hh.ru/vacancies?per_page=${perPage}&page=${page}${param}`);
-            const cardsJson = await cardsData.json();
+            const ApiSettings = await fetch(`https://api.hh.ru/vacancies?per_page=${perPage}&page=${page}${param}`);
+            const cardsJson = await ApiSettings.json();
 
             for (const item of cardsJson.items.entries()) {
                 await this.cardFullApiLoadData(item[1].id, cards);
@@ -817,7 +817,7 @@ const addEvents = (cardData) => {
 }
 
 window.onload = () => {
-    const cardData = new CardsData();
+    const cardData = new ApiSettings();
 
     cardData.loadCardData();
     addEvents(cardData);
