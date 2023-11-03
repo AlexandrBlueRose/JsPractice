@@ -8,9 +8,9 @@ const arr = ['banana', true, 1, 'car', {}, { a: 1 }, 5, true, true, false, 455, 
  * @param {object} arr - Объект из любых элементов
  * @returns {object} arr - Объект в котором все числа увеличены в 2 раза
  */
-funcMultiplyingNumByTwo = (arr) => arr.map(item => typeof(item) === "number"? item*2 : item);
+multiplyingNumByTwo = (arr) => arr.map(item => typeof(item) === "number"? item*2 : item);
 
-console.log(funcMultiplyingNumByTwo(arr));
+console.log(multiplyingNumByTwo(arr));
 
 /** 
  * 2. Возвращает объект в котором поля с названиями равными
@@ -20,7 +20,7 @@ console.log(funcMultiplyingNumByTwo(arr));
  * @param {object} arr - Объект из любых элементов
  * @return {object} arr - Объект в котором элем-ты соответствуют типам данных и кол-ву таких элементов в изначальном массиве arr
  */
-funcCountTypeArgs = (arr) => 
+countTypeArgs = (arr) => 
     arr.reduce((acc, cur) => {
         const itemType = typeof(cur);
 
@@ -33,7 +33,7 @@ funcCountTypeArgs = (arr) =>
         return acc;
     }, {});
 
-console.log(funcCountTypeArgs(arr));
+console.log(countTypeArgs(arr));
 
 /** 
  * 3. Возвращает отсортированный объект в порядке булевы, числа, строки, объекты
@@ -41,7 +41,7 @@ console.log(funcCountTypeArgs(arr));
  * @param {object} arr - Объект из любых элементов
  * @return {object} arr - Объект в котором элем-ты отсортированы в порядке булевы, числа, строки, объекты
  */
-funcSortByType = (arr) => 
+sortByType = (arr) => 
     arr.sort((a, b) => {
         if(typeof(a) > typeof(b)){
             return 1;
@@ -56,7 +56,7 @@ funcSortByType = (arr) =>
         }
     });
 
-console.log(funcSortByType(arr));
+console.log(sortByType(arr));
 
 /** 
  * 4. Функция принимает неограниченное число параметров и возвращает массив в котором каждое число 
@@ -65,9 +65,9 @@ console.log(funcSortByType(arr));
  * @param {object} args - Набор входных параметров любого типа данных
  * @return {object} result - Объект, где каждое число умножается на общее количество входных аргументов
  */
-funcMultiplyingByLenArgs = (...args) => args.map(arg => typeof(arg) === "number" ? arg * args.length : arg);
+multiplyingByLenArgs = (...args) => args.map(arg => typeof(arg) === "number" ? arg * args.length : arg);
 
-console.log(funcMultiplyingByLenArgs(3, 4, 5, 6, 10));
+console.log(multiplyingByLenArgs(3, 4, 5, 6, 10));
 
 /** 
  * 5. Функция принимает набор слов и возвращает набор слов отсортированных по количеству повторов этого слова, 
@@ -78,7 +78,7 @@ console.log(funcMultiplyingByLenArgs(3, 4, 5, 6, 10));
  * @return {object} result, отсортированный набор слов по количеству повторов и если параметр уникальности одинаковый, 
  * то сортировка производится по алфавиту
  */
-funcSortRepeatElem = (wordsData) => {
+sortRepeatElem = (wordsData) => {
     wordsData = Object.entries(wordsData.sort().reduce((acc, cur) => {
         if(acc[cur]){
             acc[cur]++;  
@@ -92,7 +92,7 @@ funcSortRepeatElem = (wordsData) => {
     return Object.keys(Object.fromEntries(wordsData));
 }
 
-console.log(funcSortRepeatElem(['fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana']))
+console.log(sortRepeatElem(['fruit', 'keyboard', 'word', 'word', 'keyboard', 'word', 'fruit', 'banana']))
 
 /** Работа с объектами **/
 
@@ -104,9 +104,9 @@ const obj = { a: 1, b: 2, c: 3, d: 1 };
  * @param {object} obj, объект пар ключ-значение
  * @return {number} result, кол-во ключей
  **/
-funcCountNumKeys = (inputObj) => Object.keys(inputObj).length;
+countNumKeys = (inputObj) => Object.keys(inputObj).length;
 
-console.log(funcCountNumKeys(obj));
+console.log(countNumKeys(obj));
 
 const obj2 = { a: 1, b: 2, c: 3 };
 
@@ -116,9 +116,9 @@ const obj2 = { a: 1, b: 2, c: 3 };
  * @param {object} obj - объект пар ключ-значение
  * @return {object} result - объект со структурой { a: 1, b: 2, c: 3, d: 4 }, где d = (a + c)
  **/
-funcChangeObjStructure = (inputObj) => newObject = {...inputObj, d: inputObj.a + inputObj.c};
+changeObjStructure = (inputObj) => ({...inputObj, d: inputObj.a + inputObj.c});
 
-console.log(funcChangeObjStructure(obj2));
+console.log(changeObjStructure(obj2));
 
 
 /** Работа с классами **/
