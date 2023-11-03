@@ -619,7 +619,7 @@ textarea[placeholder] {
     @-moz-document url-prefix() {
       position: absolute;
       left: 50%;
-      top: - calc($minor * 3);
+      top: -calc($minor * 3);
       transform: translate(-50%, 0);
     }
   }
@@ -633,7 +633,7 @@ textarea[placeholder] {
       font: font(400, $fontSizeM, 140%);
     }
     @-moz-document url-prefix() {
-      padding-top: calc($minor * 12)
+      padding-top: calc($minor * 12);
     }
   }
   &__fieldset {
