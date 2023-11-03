@@ -20,9 +20,10 @@ console.log(funcMultiplyingNumByTwo(arr));
  * @param {object} arr - Объект из любых элементов
  * @return {object} arr - Объект в котором элем-ты соответствуют типам данных и кол-ву таких элементов в изначальном массиве arr
  */
-funcCountTypeArgs = (arr) => {
-    return arr.reduce((acc, cur) => {
+funcCountTypeArgs = (arr) => 
+    arr.reduce((acc, cur) => {
         const itemType = typeof(cur);
+
         if(acc[itemType]){
             acc[itemType]++;
         }
@@ -30,8 +31,8 @@ funcCountTypeArgs = (arr) => {
             acc[itemType] = 1;
         }
         return acc;
-    }, {})
-}
+    }, {});
+
 console.log(funcCountTypeArgs(arr));
 
 /** 
@@ -40,8 +41,8 @@ console.log(funcCountTypeArgs(arr));
  * @param {object} arr - Объект из любых элементов
  * @return {object} arr - Объект в котором элем-ты отсортированы в порядке булевы, числа, строки, объекты
  */
-funcSortByType = (arr) => {
-    return arr.sort(function(a, b){
+funcSortByType = (arr) => 
+    arr.sort((a, b) => {
         if(typeof(a) > typeof(b)){
             return 1;
         }
@@ -53,8 +54,7 @@ funcSortByType = (arr) => {
                 return -1;
             }
         }
-    }) 
-}
+    });
 
 console.log(funcSortByType(arr));
 
@@ -79,7 +79,7 @@ console.log(funcMultiplyingByLenArgs(3, 4, 5, 6, 10));
  * то сортировка производится по алфавиту
  */
 funcSortRepeatElem = (wordsData) => {
-    wordsData = Object.entries(wordsData.sort().reduce(function(acc, cur) {
+    wordsData = Object.entries(wordsData.sort().reduce((acc, cur) => {
         if(acc[cur]){
             acc[cur]++;  
         }
@@ -141,9 +141,6 @@ class Figure{
     * @param {number} figureParams - параметры фигуры для вычисления площади
     */
     constructor(...figureParams){
-        /** 
-        * @property {number} площадь фигуры.
-        */
         this.area = figureParams;
     }
 
@@ -174,9 +171,7 @@ class Square extends Figure{
     */
     constructor(figureParam){
         super(figureParam);
-        /** 
-        * @property {number} площадь фигуры.
-        */
+
         this.area = figureParam*figureParam;
     }
 
@@ -207,6 +202,7 @@ class Circle extends Figure{
     */
     constructor(figureParam){
         super(figureParam);
+
         this.area = Math.PI * (figureParam * figureParam);
     }
 
