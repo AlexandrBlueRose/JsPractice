@@ -83,12 +83,12 @@ const serverFunction = () =>
             host: 'localhost',
             port: 3000,
     });
-        const watchFunction = () => {
+    const watchFunction = () => {
             gulp.watch([path.watch.html], gulp.series(buildHtml));
             gulp.watch([path.watch.css], gulp.series(buildCSS));
             gulp.watch([path.watch.js], gulp.series(buildJs));
             gulp.watch([path.watch.img], gulp.series(buildImg));
-        };
+    };
 
 const buildFunction = () => gulp.series(clean, buildHtml, buildCSS, buildJs, buildImg, buildFonts);
 
