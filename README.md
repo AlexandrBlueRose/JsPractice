@@ -7,6 +7,13 @@
 По итогам практики завершил верстку и написание скриптов.
 Сайт выложил на свой хостинг по адресу http://f0880775.xsph.ru/
 
+Запуск локально
+<pre>
+   npm install
+   npm run build
+   npm run dev
+</pre>
+
 
 Общие улучшения.
 1. HTML код проверен и соответствует стандартам W3 [ссылка на анализ на соответствие стандартам](https://validator.w3.org/check?uri=http%3A%2F%2Ff0880775.xsph.ru%2F&charset=%28detect+automatically%29&doctype=Inline&group=0)
