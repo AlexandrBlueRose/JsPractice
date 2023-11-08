@@ -1,4 +1,5 @@
 import CardsHandler from "./CardsHandler.js";
+import { NUM_CARD_IN_PAGE, MAX_CARD_LOADING } from "./utils/constants.js";
 
 /** 
  * Класс описывающий настройки выгрузки карточек.
@@ -40,9 +41,9 @@ export default class ApiSettings {
      * @param {string} maxCardLoading - максимальное кол-во карточек доступных для загрузки для сессии, по умолчанию 2000.
      * @param {string} cards - массив карточек, по умолчанию пустой массив.
      */
-    constructor(numCardInPage = 5, maxCardLoading = 2000, cards = []) {
-        this.#numCardInPage = numCardInPage;
-        this.#maxCardLoading = maxCardLoading;
+    constructor(cards = []) {
+        this.#numCardInPage = NUM_CARD_IN_PAGE;
+        this.#maxCardLoading = MAX_CARD_LOADING;
         this.#cards = cards;
         this.#indexPage = 1;
     }

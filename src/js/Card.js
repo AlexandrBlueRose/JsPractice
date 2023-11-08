@@ -185,7 +185,7 @@ export default class Card {
             </div>
 
             <div class = "card__details card__details--down">
-              <button class = "link card__details-button" onClick = "detailsDescriptionEvent(this)">More details</button>
+              <button class = "link card__details-button" onClick = "onDetailsDescriptionClick(this)">More details</button>
             </div>
           </div>
         </div>

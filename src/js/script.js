@@ -1,6 +1,6 @@
 'use strict';
 import ApiSettings from "./ApiSettings.js";
-import { NUM_CARD_IN_PAGE, MAX_CARD_LOADING, TIMEOUT_API_CALL } from "./utils/constants.js"; 
+import { TIMEOUT_API_CALL } from "./utils/constants.js"; 
 import { validationRules } from "./utils/regex.js";
 import { MASK_PHONE } from "./utils/mask.js";
 
@@ -119,9 +119,10 @@ const submitForm = (message, formWrappers) => {
  * 
  * @returns {boolean} значение bool обозначающее выполнение или невыполнение условий проверки валидации полей
  */
-const maskPhone = (selector, masked = '+7 (___) ___ ____') => {
+const maskPhone = (selector) => {
 	const elem = selector;
-
+    const masked = MASK_PHONE;
+    
 	function mask(event) {
 		const keyCode = event.keyCode;
 		const template = masked,
@@ -166,7 +167,7 @@ const maskPhone = (selector, masked = '+7 (___) ___ ____') => {
  * 
  * @param {object} cardButton объект DOM кнопки открытия детальной информации описания карточки вакансии
  */
-const detailsDescriptionEvent = (cardButton) => {
+const onDetailsDescriptionClick = (cardButton) => {
     const card = cardButton.closest('.card');
     const cardDetails = card.querySelector('.card__details');
 
@@ -191,7 +192,7 @@ const detailsDescriptionEvent = (cardButton) => {
  * @param {object} cardData объект содержащий параметры работы с API загрузки карточек
  * @param {object} loadCardButton объект DOM кнопки загрузки карточек
  */
-const loadCardsEvent = (cardData, loadCardButton, timeout = 4500) => (event) => {
+const onLoadCardsClick = (cardData, loadCardButton) => (event) => {
     if (cardData.getIndexPage() * cardData.getNumCardInPage() >= cardData.getMaxCardLoading()) {
         document.querySelector('.card-block__load-card').classList.add('card-block__load-card--hide');
         cardData.indexPageReset();
@@ -204,7 +205,7 @@ const loadCardsEvent = (cardData, loadCardButton, timeout = 4500) => (event) => 
 
         setTimeout(() => {
             loadCardButton.disabled = false;
-        }, timeout);
+        }, TIMEOUT_API_CALL);
     }
 }
 
@@ -236,7 +237,7 @@ const loadCardDataWithParams = (params, cardData) => {
  * @param {object} cardData объект содержащий параметры работы с API загрузки карточек
  * @param {object} loadCardButton объект DOM кнопки загрузки карточек
  */
-const filterCardLoadEvent = (cardData, loadCardButton, timeout = 4500) => (event) => {
+const onFilterCardLoadClick = (cardData, loadCardButton) => (event) => {
     const paramsList = document.querySelectorAll('.filter');
     let params = {};
 
@@ -253,7 +254,7 @@ const filterCardLoadEvent = (cardData, loadCardButton, timeout = 4500) => (event
 
     setTimeout(() => {
         loadCardButton.disabled = false;
-    }, timeout);
+    }, TIMEOUT_API_CALL);
 }
 
 /** 
@@ -261,7 +262,7 @@ const filterCardLoadEvent = (cardData, loadCardButton, timeout = 4500) => (event
  * 
  * @param {object} cardData объект содержащий параметры работы с API загрузки карточек
  */
-const filterCardClearEvent = (cardData) => (event) => {
+const onFilterCardClearClick = (cardData) => (event) => {
     const paramsList = document.querySelectorAll('.filter');
 
     cardData.indexPageReset();
@@ -286,7 +287,7 @@ const filterCardClearEvent = (cardData) => (event) => {
  * @param {object} selectList объект DOM выпадающего списка вариантов фильтрации запроса к API
  * @param {object} filterButton объект DOM кнопки выбора фильтрации
  */
-const filterButtonToggleOptionSelectedVisibleEvent = (selectList, filterButton) => (event) => {
+const onFilterOptionClick = (selectList, filterButton) => (event) => {
     selectList.classList.toggle('select-wrapper__list--visible');
     filterButton.blur();
 }
@@ -297,7 +298,7 @@ const filterButtonToggleOptionSelectedVisibleEvent = (selectList, filterButton) 
  * @param {object} filter объект DOM кнопки фильтра на котором сработало событие
  * @param {object} listFilters объекты DOM других(всех кроме нажатой) кнопок выбора фильтрации
  */
-const filterResetArrowEvent = (filter, listFilters) => (event) => {
+const onFilterResetArrowClick = (filter, listFilters) => (event) => {
     if (filter.classList.contains('select-wrapper__input--up')) {
         resetArrowImg(filter);
 
@@ -320,7 +321,7 @@ const filterResetArrowEvent = (filter, listFilters) => (event) => {
  * @param {object} filterButton объект DOM кнопки выбора фильтрации
  * @param {object} item объект DOM выбранного пункта(параметра) фильтрации
  */
-const selectListItemEvent = (selectList, filterButton, item) => (event) => {
+const onSelectListItemClick = (selectList, filterButton, item) => (event) => {
     event.stopPropagation();
     filterButton.innerText = item.innerText;
     filterButton.setAttribute('data-eventual', 'NotSelected');
@@ -339,7 +340,7 @@ const selectListItemEvent = (selectList, filterButton, item) => (event) => {
  * @param {object} selectList объект DOM выпадающего списка вариантов фильтрации запроса к API
  * @param {object} filterButton объект DOM кнопки выбора фильтрации
  */
-const listItemsHideClickEvent = (selectList, filterButton) => (event) => {
+const onListItemsHideClick = (selectList, filterButton) => (event) => {
     if (event.target !== filterButton) {
         selectList.classList.remove('select-wrapper__list--visible');
         filterButton.classList.add('select-wrapper__input--active');
@@ -354,7 +355,7 @@ const listItemsHideClickEvent = (selectList, filterButton) => (event) => {
  * @param {object} selectList объект DOM выпадающего списка вариантов фильтрации запроса к API
  * @param {object} filterButton объект DOM кнопки выбора фильтрации
  */
-const listItemsHideKeydownEvent = (selectList, filterButton) => (event) => {
+const onListItemsHideKeydown = (selectList, filterButton) => (event) => {
     if (event.key === 'Tab' || event.key === 'Escape') {
         selectList.classList.remove('select-wrapper__list--visible');
         filterButton.classList.remove('select-wrapper__input--up');
@@ -376,14 +377,14 @@ const filterDataEvents = (wrappers) => {
                 const selectList = selectWrapper.querySelector('.select-wrapper__list');
                 const selectListItem = selectList.querySelectorAll('.select-wrapper__list-item');
 
-                addListener(filterButton, filterButtonToggleOptionSelectedVisibleEvent(selectList, filterButton), 'click');
+                addListener(filterButton, onFilterOptionClick(selectList, filterButton), 'click');
 
                 for (const item of selectListItem) {
-                    addListener(item, selectListItemEvent(selectList, filterButton, item), 'click');
+                    addListener(item, onSelectListItemClick(selectList, filterButton, item), 'click');
                 }
 
-                addListener(document, listItemsHideClickEvent(selectList, filterButton), 'click');
-                addListener(document, listItemsHideKeydownEvent(selectList, filterButton), 'keydown');
+                addListener(document, onListItemsHideClick(selectList, filterButton), 'click');
+                addListener(document, onListItemsHideKeydown(selectList, filterButton), 'keydown');
             }
         }
     }
@@ -395,7 +396,7 @@ const filterDataEvents = (wrappers) => {
  * @param {object} form объект DOM формы
  * @param {object} formWrappers элемент DOM формы
  */
-const formSubmit = (form, formWrappers) => (event) => {
+const onFormSubmit = (form, formWrappers) => (event) => {
     const message = {
         name: '',
         email: '',
@@ -429,21 +430,21 @@ const addEvents = (cardData) => {
     const form = document.querySelector('.request-block__form');
     const formWrappers = document.querySelectorAll('.form__label');
 
-    addListener(loadCardButton, loadCardsEvent(cardData, loadCardButton, TIMEOUT_API_CALL), 'click');
-    addListener(filterCards, filterCardLoadEvent(cardData, filterCards, TIMEOUT_API_CALL), 'click');
-    addListener(filtersClear, filterCardClearEvent(cardData), 'click');
+    addListener(loadCardButton, onLoadCardsClick(cardData, loadCardButton), 'click');
+    addListener(filterCards, onFilterCardLoadClick(cardData, filterCards), 'click');
+    addListener(filtersClear, onFilterCardClearClick(cardData), 'click');
     filterDataEvents(wrappers);
 
     for (const filter of filters) {
-        addListener(filter, filterResetArrowEvent(filter, filters), 'click');
+        addListener(filter, onFilterResetArrowClick(filter, filters), 'click');
     }
 
-    maskPhone(phone, MASK_PHONE);
-    addListener(form, formSubmit(form, formWrappers), 'submit');
+    maskPhone(phone);
+    addListener(form, onFormSubmit(form, formWrappers), 'submit');
 }
 
 window.onload = () => {
-    const cardData = new ApiSettings(NUM_CARD_IN_PAGE, MAX_CARD_LOADING);
+    const cardData = new ApiSettings();
 
     cardData.loadCardData();
     addEvents(cardData);
