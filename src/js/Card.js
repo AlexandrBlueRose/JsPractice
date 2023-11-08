@@ -138,7 +138,6 @@ export default class Card {
         cardDefinition.className = 'card card-block__item';
 
         cardDefinition.innerHTML =`
-        <div class = "card card-block__item">
           <div class = "card__body">
             <div class = "card__title">
 
@@ -195,7 +194,6 @@ export default class Card {
               <button class = "link card__details-button">More details</button>
             </div>
           </div>
-        </div>
         `;
 
         addListener(
