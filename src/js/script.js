@@ -10,9 +10,8 @@ import { MASK_PHONE } from "./utils/mask.js";
  * @param {object} obj объект для проверки
  * @returns {boolean} значение bool обозначающее наличие или отсутствие содержимого в объекте
  */
-export const isEmptyObject = (obj) => {
-    return Object.keys(obj).length === 0;
-}
+export const isEmptyObject = (obj) =>
+    Object.keys(obj).length === 0;
 
 /** 
  * Функция добавления события на элемент DOM.

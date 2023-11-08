@@ -26,7 +26,7 @@
     &__body {
       display: flex;
       width: 100%;
-      padding: calc($major * 5) calc($major * 5) calc($major * 6) calc($major * 5);
+      padding: calc($major * 5) calc($major * 5) calc($major * 6);
       gap: calc($major * 3);
       border-radius: calc($major * 2);
       align-items: start;
