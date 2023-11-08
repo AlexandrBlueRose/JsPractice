@@ -1,8 +1,19 @@
 'use strict';
 import ApiSettings from "./ApiSettings.js";
 import { TIMEOUT_API_CALL } from "./utils/constants.js"; 
-import { validationRules } from "./utils/regex.js";
+import { EMAIL_REG } from "./utils/regex.js";
 import { MASK_PHONE } from "./utils/mask.js";
+
+
+/** 
+ * Константа описывающая правила по входным данным для полей формы
+ * @type { { nameLength: number, emailReg: string, phoneReg: number } } 
+ */
+export const validationRules = {
+    nameLength: 2,
+    emailReg: EMAIL_REG,
+    phoneReg: 17
+}
 
 /** 
  * Функция проверки объекта на наличие значения
