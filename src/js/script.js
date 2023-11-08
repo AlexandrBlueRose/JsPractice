@@ -141,7 +141,7 @@ const maskPh = (selector, masked = '+7 (___) ___ ____') => {
 		}
 
 		let reg = template.substr(0, this?.value?.length).replace(/_+/g,
-			 (a) => {
+			(a) => {
 				return "\\d{1," + a.length + "}";
 			}).replace(/[+()]/g, "\\$&");
 
