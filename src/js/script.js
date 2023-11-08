@@ -21,7 +21,7 @@ export const isEmptyObject = (obj) =>
  * @param {object} event объект события
  * 
  */
-const addListener = (elem, func, event) => {
+export const addListener = (elem, func, event) => {
     if (elem.clickHandler) {
         elem.removeEventListener(event, elem.clickHandler);
     }
@@ -167,8 +167,8 @@ const maskPhone = (selector) => {
  * 
  * @param {object} cardButton объект DOM кнопки открытия детальной информации описания карточки вакансии
  */
-const onDetailsDescriptionClick = (cardButton) => {
-    const card = cardButton.closest('.card');
+export const onDetailsDescriptionClick = (card) => (event) => {
+    const cardButton = card.querySelector('.card__details-button');
     const cardDetails = card.querySelector('.card__details');
 
     card.querySelector('.card__description-footer').classList.toggle('card__description-footer--hide');

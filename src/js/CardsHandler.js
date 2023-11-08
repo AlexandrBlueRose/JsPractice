@@ -1,5 +1,4 @@
 import Card from "./Card.js";
-import {isEmptyObject} from './script.js';
 /** 
  * Класс логику взаимодействия с API загрузки карточек.
  * @class
@@ -86,7 +85,7 @@ export default class CardsHandler {
             }
 
             for (const card of cards) {
-                document.querySelector('.card-block__list').insertAdjacentHTML('beforeend', card.cardDefinition());
+                document.querySelector('.card-block__list').appendChild(card.cardDefinition());
             }
         } catch (err) {
             console.error(err);

@@ -1,3 +1,5 @@
+import { addListener, onDetailsDescriptionClick} from './script.js';
+
 /** 
  * Класс создающий новую карточки.
  * @class
@@ -127,10 +129,15 @@ export default class Card {
      * @return {string} The card definition value.
      */
     cardDefinition() {
+        const cardDefinition = document.createElement('div');
+
         if (!this.#logoUrl) {
             this.#classOption = 'visually-hidden';
         }
-        return `
+
+        cardDefinition.className = 'card card-block__item';
+
+        cardDefinition.innerHTML =`
         <div class = "card card-block__item">
           <div class = "card__body">
             <div class = "card__title">
@@ -185,11 +192,18 @@ export default class Card {
             </div>
 
             <div class = "card__details card__details--down">
-              <button class = "link card__details-button" onClick = "onDetailsDescriptionClick(this)">More details</button>
+              <button class = "link card__details-button">More details</button>
             </div>
           </div>
         </div>
         `;
+
+        addListener(
+          cardDefinition.querySelector('.card__details-button'), 
+          onDetailsDescriptionClick(cardDefinition), 
+          'click');
+
+        return cardDefinition;
     }
 
 }
