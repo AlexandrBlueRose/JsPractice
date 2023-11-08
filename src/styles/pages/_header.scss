@@ -1,0 +1,239 @@
+@use "../global/base";
+@use "../global/fonts";
+@use "../global/mixins";
+
+.header {
+    &__content {
+      padding: calc($major * 8) 0 calc($major * 6) 0;
+  
+      @include mq($md) {
+        padding: calc($major * 4) 0;
+      }
+    }
+  
+    &__title {
+      margin-top: 0;
+      margin-bottom: calc($major * 5);
+
+      @include mq($md) {
+        margin-bottom: calc($major * 3);
+      }
+    }
+  }
+  
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(0.45583333333%, 547px));
+    gap: calc($major * 2) calc($major * 4);
+    align-items: flex-end;
+
+    @include mq($md) {
+      gap: calc($major * 3);
+    }
+  
+    &__label {
+      position: relative;
+    }
+
+    &__label-wrapper {
+      display: grid;
+      gap: calc($major * 2);
+      align-items: flex-start;
+      grid-template-columns: repeat(auto-fit, minmax(262px, 1fr));
+    }
+
+    &__clear-filters {
+      position: relative;
+      width: max-content;
+      cursor: url(../../img/svg/pointing.svg), pointer;
+
+      &::before {
+        content: "";
+        position: absolute;
+        background-image: url(../../img/svg/close.svg);
+        height: calc($major * 2);
+        width: calc($major * 2);
+        background-repeat: no-repeat;
+        background-position: center;
+        bottom: calc(18%);
+
+        @include mq($md) {
+          bottom: 0;
+        }
+      }
+
+      ::after {
+        content: "";
+        position: absolute;
+        height: calc($minor/4);
+        opacity: 0.2;
+        background: $cl-blue;
+        width: calc($minor * 20.5);
+        top: calc(92%);
+        left: 19%;
+      }
+    }
+  
+    &__clear-filters-input {
+      padding-left: calc($minor * 5);
+      cursor: url(../../img/svg/pointing.svg), pointer;
+    }
+
+    &__clear-filters--hide {
+      display: none;
+    }
+  
+    &__search {
+      width: max-content;
+      padding: $major calc($major * 4);
+      cursor: url(../../img/svg/pointing.svg), pointer;
+  
+      @include mq($xl) {
+        order: 2;
+      }
+      @include mq($sm) {
+        width: 100%;
+      }
+    }
+  }
+  
+  .select-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: $minor;
+    font: font(500, $fontSizeXS, 125%);
+  
+    &__input {
+      position: relative;
+      padding: $minor calc($minor * 3);
+      height: calc($minor * 11);
+      font: font(400, $fontSizeS, 140%);
+      border: calc($minor/4) solid $cl-grey400;
+      border-radius: $minor;
+      background: $cl-baseColor;
+      color: $cl-grey600;
+      text-align: left;
+      cursor: url(../../img/svg/pointing.svg), pointer;
+
+      &:focus {
+        outline: none;
+        box-shadow: none;
+        border: calc($minor/4) solid $cl-blue;
+      }
+    }
+  
+    &__input--down {
+      &::after {
+        content: "";
+        position: absolute;
+        background-image: url(../../img/svg/chevronDown.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width: calc($major * 2);
+        height: calc($major * 2);
+        top: calc(50%);
+        right: calc($minor * 2.75);
+        transform: translateY(-50%);
+      }
+    }
+  
+    &__input--up {
+      &::after {
+        content: "";
+        position: absolute;
+        background-image: url(../../img/svg/chevronUp.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width: calc($major * 2);
+        height: calc($major * 2);
+        top: calc(50%);
+        right: calc($minor * 2.5);
+        transform: translateY(-50%);
+      }
+    }
+  
+    &__input--selected {
+      color: $cl-black;
+    }
+  
+    &__input--active {
+      outline: none;
+      box-shadow: none;
+      border: calc($minor/4) solid $cl-grey400;
+    }
+  
+    &__list {
+      display: none;
+      position: absolute;
+      margin: 0;
+      padding: 0;
+      list-style-type: none;
+      background-color: $cl-baseColor;
+      box-shadow: $Box;
+      overflow: hidden;
+      border-radius: $minor;
+      align-items: flex-start;
+      width: 100%;
+      z-index: 1;
+      top: calc($minor * 16.75);
+      cursor: url(../../img/svg/pointing.svg), pointer;
+    }
+  
+    &__list--visible {
+      display: block;
+    }
+  
+    &__list-item {
+      display: flex;
+      align-items: self-end;
+      margin: 0;
+      padding: $major calc($minor * 3);
+      height: calc($major * 5);
+      font: font(400, $fontSizeS, 140%);
+      color: $cl-black;
+      cursor: url(../../img/svg/pointing.svg), pointer;
+
+      &:hover {
+        color: $cl-baseColor;
+        background-color: $cl-blue;
+      }
+    }
+  }
+  
+.link {
+    background-color: transparent;
+    border: 0;
+    width: max-content;
+    font: font(400, $fontSizeM, 145%);
+    color: $cl-blue;
+    text-decoration: none;
+    cursor: url(../../img/svg/pointing.svg), pointer;
+
+    @include mq($md) {
+      font: font(400, $fontSizeS, 140%);
+    }
+}
+  
+.blue-button {
+    height: calc($minor * 11);
+    padding: $major calc($major * 4);
+    justify-content: center;
+    border: 0;
+    border-radius: $minor;
+    background-color: $cl-blue;
+    color: $cl-baseColor;
+    text-align: center;
+    font: font(700, $button, 140%);
+    cursor: url(../../img/svg/pointing.svg), pointer;
+
+    &:hover {
+      background-color: $cl-blueHover;
+    }
+    &:disabled {
+      cursor: default;
+      background-color: $cl-blueHover;
+      opacity: 0.7;
+    }
+}

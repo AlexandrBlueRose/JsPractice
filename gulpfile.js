@@ -18,7 +18,7 @@ const path = {
     src: {
         html: 'src/*.*',
         css: 'src/styles/*.scss',
-        js: 'src/js/*.js',
+        js: 'src/js/**/*.js',
         img:'src/img/**/*.*',
         fonts:'src/fonts/*.*',
     },
@@ -26,7 +26,7 @@ const path = {
     watch: {
         html: 'src/*.*',
         css: 'src/styles/**/*.scss',
-        js: 'src/js/*.js',
+        js: 'src/js/**/*.js',
         img: 'src/img/*.*',
     }
 };

@@ -1,16 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 	<title>Html Css Js Internship Vacancies Site</title>
+
 	<!-- Main site info Tags -->
 	<meta name="format-detection" content="telephone=no">
 	<meta name="description" content="Website for collecting vacancies from service HH.ru with filter cards and reply" />
 	<meta name="keywords" content="advice, time, form, section, selected, vacancies, work, greensight, internship, practice, hh.ru">
 	<meta name="author" content="Alexandr Khaidarov">
+
 	<!-- Facebook Meta Tags -->
 	<meta property="og:url" content="http://f0880775.xsph.ru/">
 	<meta property="og:type" content="website">
@@ -19,6 +20,7 @@
 	<meta property="og:image" content="http://f0880775.xsph.ru/img/favicon/social.jpeg" />
 	<meta property="og:image:width" content="1200">
 	<meta property="og:image:height" content="630">
+
 	<!-- Twitter Meta Tags -->
 	<meta name="twitter:card" content="summary_large_image">
 	<meta property="twitter:domain" content="f0880775.xsph.ru">
@@ -28,29 +30,34 @@
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:image" content="http://f0880775.xsph.ru/img/favicon/social.jpeg" />
 	<meta property="vk:image" content="http://f0880775.xsph.ru/img/favicon/social.jpeg" />
+
 	<!-- Load styles and img -->
 	<link rel="icon" href="./img/favicon/favicon.png">
 	<link rel="stylesheet" href="./css/styles.css"> </head>
-
 <body>
 	<header class="header">
 		<div class="container">
 			<div class="header__content">
+
 				<h1 class="header__title">
                     List of vacancies
                 </h1>
+
 				<div class="filters header__filters">
 					<div class="filters__label-wrapper">
 						<div class="select-wrapper filters__label"> Form
 							<button class="filter select-wrapper__input select-wrapper__input--down" data-key="employment" data-Eventual="NotSelected" data-Preliminary="NotSelected"> Not selected </button>
+
 							<ul class="select-wrapper__list">
 								<li class="select-wrapper__list-item" data-value="full">Full time</li>
 								<li class="select-wrapper__list-item" data-value="part">Half time</li>
 								<li class="select-wrapper__list-item" data-value="probation">Part time</li>
 							</ul>
 						</div>
+
 						<div class="select-wrapper filters__label"> Experience
 							<button class="filter select-wrapper__input select-wrapper__input--down" data-key="experience" data-Eventual="NotSelected" data-Preliminary="NotSelected"> Not selected </button>
+
 							<ul class="select-wrapper__list">
 								<li class="select-wrapper__list-item" data-value="noExperience">No experience</li>
 								<li class="select-wrapper__list-item" data-value="between1And3">Between 1 and 3</li>
@@ -59,7 +66,9 @@
 							</ul>
 						</div>
 					</div>
+
 					<button class="blue-button filters__search">Search</button>
+
 					<div class="filters__clear-filters filters__clear-filters--hide">
 						<button class="filters__clear-filters-input link">Clear filters</button>
 					</div>
@@ -73,50 +82,75 @@
 				<div class="card-block__content">
 					<h2 class="card-block__heading-cards visually-hidden">
                             Card Section
-                        </h2>
+                    </h2>
+
 					<div class="card-block__list" lang="ru"> </div>
 					<button class="blue-button card-block__load-card">Show more</button>
 				</div>
 			</div>
 		</section>
+
 		<section class="request-block">
 			<div class="container">
 				<div class="request-block__content">
 					<h2 class="main__heading-form visually-hidden">
                             Form Section
-                        </h2>
+                    </h2>
+
 					<form class="form request-block__form" method="get">
 						<fieldset class="form__fieldset">
 							<legend class="form__legend"> Leave a request </legend>
+
 							<p class="form__description"> We will advise you and help you start a new project </p>
+
 							<label class="select-wrapper form__label"> Your name
-								<input class="select-wrapper__input" type="text" name="name" placeholder="Please introduce yourself" required /> </label>
+								<input class="select-wrapper__input" type="text" name="name" placeholder="Please introduce yourself" required /> 
+							</label>
+
 							<label class="select-wrapper form__label"> Email
-								<input class="select-wrapper__input" type="text" name="email" placeholder="ivanov@gmail.com" pattern="^.+@[^\.].*\.[a-z]{2,}$" required /> </label>
+								<input class="select-wrapper__input" type="text" name="email" placeholder="ivanov@gmail.com" pattern="^.+@[^\.].*\.[a-z]{2,}$" required />
+							</label>
+
 							<label class="select-wrapper form__label"> Phone number
-								<input class="inputPhone select-wrapper__input" type="text" name="phoneNumber" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}\s\d{4}" placeholder="+7 (123) 456 7891" required /> </label>
+								<input class="inputPhone select-wrapper__input" type="text" name="phoneNumber" pattern="[\+]\d{1}\s[\(]\d{3}[\)]\s\d{3}\s\d{4}" placeholder="+7 (123) 456 7891" required />
+							</label>
+
 							<label class="select-wrapper form__label"> Comment
 								<textarea name="textArea" class="form__text-area select-wrapper__input" cols="30" rows="10" placeholder="Message text"></textarea>
 							</label>
 						</fieldset>
-						<input class="blue-button form__button" value="Send" type="submit" /> </form>
+						<input class="blue-button form__button" value="Send" type="submit" /> 
+					</form>
+
 					<p class="form__button-description"> By clicking "Send" you confirm your consent to the
-						<br /> <a class="link form__link" href="">
-								processing of personal data
-							</a> </p>
+						<br /> 
+
+						<a class="link form__link" href="">
+							processing of personal data
+						</a> 
+					</p>
 				</div>
 			</div>
 		</section>
 	</main>
+
 	<footer class="footer">
 		<div class="container">
 			<div class="footer__content">
-				<div class="footer__contacts"> <a href="tel:+74993816669" class="footer__tel">+7 499 391-66-69</a> <a href="mailto:mail@greensight.ru" class="footer__mail">mail@greensight.ru</a> </div>
-				<div class="footer__address"> <a href="https://yandex.ru/maps/-/CDUT6ZMu" class="footer__address">322A, 2nd Floor, Zelenograd, Moscow, Russia</a> <a href="" class="footer__directions">Directions</a> </div>
+				<div class="footer__contacts">
+					<a href="tel:+74993816669" class="footer__tel">+7 499 391-66-69</a>
+					<a href="mailto:mail@greensight.ru" class="footer__mail">mail@greensight.ru</a> 
+				</div>
+
+				<div class="footer__address">
+					<a href="https://yandex.ru/maps/-/CDUT6ZMu" class="footer__address">322A, 2nd Floor, Zelenograd, Moscow, Russia</a>
+					<a href="" class="footer__directions">Directions</a>
+				</div>
 			</div>
 		</div>
 	</footer>
-	<script src="js/script.js"></script>
+
+	<script type="module" src="js/script.js"></script>
 </body>
 
 </html>

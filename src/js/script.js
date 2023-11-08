@@ -1,412 +1,8 @@
 'use strict';
-
-/** 
- * Константа описывающая правила по входным данным для полей формы
- * @type { { nameLength: number, emailReg: string, phoneReg: number } } 
- */
-const validationRules = {
-    nameLength: 2,
-    emailReg: /^.+@[^\.].*\.[a-z]{2,}$/,
-    phoneReg: 17
-}
-
-/** 
- * Класс создающий новую карточки.
- * @class
- */
-class Card {
-    /** 
-     * ID карточки. 
-     * @type {number} 
-     */
-    #id;
-
-    /** 
-     * Название вакансии.
-     * @type {string} 
-     */
-    #title;
-
-    /** 
-     * Описание вакансии.
-     * @type {string} 
-     */
-    #description;
-
-    /** 
-     * Ссылка на лого работодателя разместившего вакансию.
-     * @type {string} 
-     */
-    #logoUrl;
-
-    /** 
-     * Объект содержащий данные работодателя:
-     * форму работы, название компании, сайт работодателя, адрес.
-     * @type {object} 
-     */
-    #conditions;
-
-    /** 
-     * Параметр для сокрытия лого в случае отсутствия ссылки.
-     * @type {string} 
-     */
-    #classOption = '';
-
-    /**
-     * Конструктор для создания карточки вакансии.
-     * 
-     * @constructor
-     * @param {number} id - уникальный идентификатор карточки вакансии, по умолчанию 0.
-     * @param {string} title - название вакансии, по умолчанию Not Selected.
-     * @param {string} description - описание вакансии, по умолчанию Not Selected.
-     * @param {string} logoUrl - ссылка на лого компании, по умолчанию пустая строка.
-     * @param {object} conditions - Объект содержащий данные работодателя: форму работы, название компании, сайт работодателя, адрес. 
-     * По умолчанию все параметры равны Not Selected.
-     */
-    constructor(id = 0, title = "Not Selected", description = "Not Selected", logoUrl = "",
-        conditions = {
-            form: "Not Selected",
-            company: "Not Selected",
-            web: "Not Selected",
-            address: "Not Selected"
-        }) {
-        this.#id = id;
-        this.#title = title;
-        this.#description = description;
-        this.#logoUrl = logoUrl;
-        this.#conditions = conditions;
-    }
-
-    /**
-     * Возвращает значение ID.
-     * @return {number} The ID value.
-     */
-    getId() {
-        return this.#id;
-    }
-
-    /**
-     * Возвращает значение title.
-     * @return {string} The title value.
-     */
-    getTitle() {
-        return this.#title;
-    }
-
-    /**
-     * Возвращает значение description.
-     * @return {string} The description value.
-     */
-    getDescription() {
-        return this.#description;
-    }
-
-    /**
-     * Задает значение description.
-     * @property {string} The description value.
-     */
-    setDescription(description) {
-        this.#description = description;
-    }
-
-
-    /**
-     * Возвращает значение logoUrl.
-     * @return {string} The logoUrl value.
-     */
-    getLogoUrl() {
-        return this.#logoUrl;
-    }
-
-    /**
-     * Задает значение logoUrl.
-     * @property {string} The logoUrl value.
-     */
-    setLogoUrl(logoUrl) {
-        this.#logoUrl = logoUrl;
-    }
-
-    /**
-     * Возвращает значение conditions.
-     * @return {object} The conditions value.
-     */
-    getConditions() {
-        return this.#conditions;
-    }
-
-    /**
-     * Возвращает данные карточки для добавления на страницу.
-     * @return {string} The card definition value.
-     */
-    cardDefinition() {
-        if (!this.#logoUrl) {
-            this.#classOption = 'visually-hidden';
-        }
-        return `
-    <div class = "card card-block__item">
-      <div class = "card__body">
-        <div class = "card__title">
-          <div class = "card__header-logo container-header-logo">
-            <h3 class = "card__position-title">${this.#title}</h3>
-            <img class = "card__logo ${this.#classOption}" src = "${this.#logoUrl}" alt = 'Company logo' height = "40px" width = "auto">
-          </div>
-          <button class = "card__respond-button">Respond</button>
-        </div>
-        <div class = "card__working-condition">
-          <p class = "condition-gray card__form-working-time">
-            Form
-            <span class = "card__data-working-time">
-              ${this.#conditions.form}
-            </span>
-          </p>
-          <p class = "condition-gray card__company-name">
-            Company
-            <span class = "card__data-company-name">
-              ${this.#conditions.company}
-            </span>
-          </p>
-          <p class = "condition-gray card__website">
-            Web
-            <a class = "span card__data-website" href = "${this.#conditions.web}">
-              ${this.#conditions.web}
-            </a>
-          </p>
-          <p class = "condition-gray card__address">
-          Address
-            <span class = "card__data-address">
-              ${this.#conditions.address}
-            </span>
-          </p> 
-        </div>
-        <div class = "card__description">
-          ${this.#description}
-          <div class = "card__description-footer">
-          </div>
-        </div>
-        <div class = "card__details card__details--down">
-          <button class = "link card__details-button" onClick = "detailsDescriptionEvent(this)">More details</button>
-        </div>
-      </div>
-    </div>
-    `;
-    }
-
-}
-
-/** 
- * Класс описывающий настройки выгрузки карточек.
- * @class
- */
-class ApiSettings {
-
-    /** 
-     * Набор карточек. 
-     * @type {object} 
-     */
-    #cards;
-
-    /** 
-     * Количество карточек для загрузки. 
-     * @type {number} 
-     */
-    #numCardInPage;
-
-    /** 
-     * Максимальное кол-во карточек доступных для загрузки, по умолчанию документация API загрузки карточек допускает 2000 объектов для выгрузки. 
-     * @type {number} 
-     */
-    #maxCardLoading;
-
-    /** 
-     * Счетчик для подсчета количества выгруженных карточек, вычисляемых по формуле (indexPage * numCardInPage), 
-     * произведение которых должно быть меньше заданной верхней границы в maxCardLoading. 
-     * @type {number} 
-     */
-    #indexPage;
-
-
-    /**
-     * Конструктор для инициализации начальных настроек выгрузки карточек вакансий.
-     * 
-     * @constructor
-     * @param {number} numCardInPage - кол-во карточек для загрузки в API, по умолчанию 5.
-     * @param {string} maxCardLoading - максимальное кол-во карточек доступных для загрузки для сессии, по умолчанию 2000.
-     * @param {string} cards - массив карточек, по умолчанию пустой массив.
-     */
-    constructor(numCardInPage = 5, maxCardLoading = 2000, cards = []) {
-        this.#numCardInPage = numCardInPage;
-        this.#maxCardLoading = maxCardLoading;
-        this.#cards = cards;
-        this.#indexPage = 1;
-    }
-
-    /**
-     * Возвращает значение numCardInPage.
-     * @return {number} The numCardInPage value.
-     */
-    getNumCardInPage() {
-        return this.#numCardInPage;
-    }
-
-    /**
-     * Возвращает значение maxCardLoading.
-     * @return {number} The maxCardLoading value.
-     */
-    getMaxCardLoading() {
-        return this.#maxCardLoading;
-    }
-
-    /**
-     * Возвращает значение cards.
-     * @return {object} The cards value.
-     */
-    getCards() {
-        return this.#cards;
-    }
-
-    /**
-     * Возвращает значение indexPage.
-     * @return {number} The indexPage value.
-     */
-    getIndexPage() {
-        return this.#indexPage;
-    }
-
-    /**
-     * Увеличивает счетчик количества загруженных страниц карточек.
-     */
-    indexPageUp() {
-        this.#indexPage++;
-    }
-
-    /**
-     * Сбрасывает счетчик загруженных страниц карточек.
-     */
-    indexPageReset() {
-        this.#indexPage = 1;
-    }
-
-    /**
-     * Очищает массив карточек.
-     */
-    clearCards() {
-        this.#cards = [];
-    }
-
-    /** 
-     * Функция загрузки карточек. 
-     * @param {object} параметры фильтрации для выгружаемых карточек.
-     */
-    loadCardData(params = {}) {
-        if (this.getIndexPage() * this.getNumCardInPage() <= this.getMaxCardLoading()) {
-            const cardHandler = new CardsHandler();
-
-            cardHandler.cardAppendOnRoot(this.getCards(), this.getNumCardInPage(), this.getIndexPage(), params);
-            this.indexPageUp();
-        } else {
-            document.querySelector('.card-block__load-card').classList.add('visually-hidden');
-        }
-    }
-}
-
-/** 
- * Класс логику взаимодействия с API загрузки карточек.
- * @class
- */
-class CardsHandler {
-
-    /** 
-     * Функция загрузки карточек из API hh.ru, по запросу к API выгружается сразу множество карточек, без полного описания.
-     * @async
-     * 
-     * @param {object} cards массив карточек, передается для заполнения
-     * @param {number} perPage кол-во загружаемых на странице карточек, за один запрос к API
-     * @param {number} page индекс страницы для загрузки карточек, с каждым запросом для загрузки новых карточек увеличивается
-     * @param {number} params параметры запроса к API, описываю значение фильтрации посылаемые к API, по которому будут выбираться карточки 
-     * @throws {Error}
-     */
-    async cardApiLoadData(cards, perPage, page, params = {}) {
-        let param = '';
-
-        if (isEmptyObject(params)) {
-            params = '';
-        } else {
-            for (const [key, value] of Object.entries(params)) {
-                param += key + value;
-            }
-        }
-        try {
-            const ApiSettings = await fetch(`https://api.hh.ru/vacancies?per_page=${perPage}&page=${page}${param}`);
-            const cardsJson = await ApiSettings.json();
-
-            for (const item of cardsJson.items.entries()) {
-                await this.cardFullApiLoadData(item[1].id, cards);
-            };
-        } catch (err) {
-            console.error(err);
-        };
-    }
-
-    /** 
-     * Функция загрузки карточки по заданному ID из API hh.ru, выгружаются все данные карточки, включая ее описание.
-     * @async
-     * 
-     * @param {number} id уникальный идентификатора загружаемой из API каточки
-     * @param {object} cards массив каточек для заполнения из API
-     * @throws {Error}
-     */
-    async cardFullApiLoadData(id, cards) {
-        try {
-            const cardData = await fetch(`https://api.hh.ru/vacancies/${id}`);
-            const cardsJson = await cardData.json();
-
-            cards.push(this.cardCompletionAbstract(cardsJson));
-        } catch (err) {
-            console.error(err);
-        };
-    }
-
-    /** 
-     * Функция создает и заполняет новый объект класса Card.
-     * 
-     * @param {object} item данные полученные из API для заполнения карточки
-     * @return {object} объект класса карточки Card
-     */
-    cardCompletionAbstract(item) {
-        let card = new Card(item.id, item?.name, item?.description, item.employer?.logo_urls?.['240'], {
-            form: item?.employment ? item.employment.name : "Not Selected",
-            company: item?.employer?.name ? item.employer.name : "Not Selected",
-            web: item?.employer?.alternate_url ? item.employer.alternate_url : "Not Selected",
-            address: item?.area?.name ? item.area.name : "Not Selected"
-        });
-        return card;
-    }
-
-    /** 
-     * Функция добавления карточки на страницу.
-     * @async
-     * 
-     * @param {object} cards массив карточек для вставки
-     * @param {number} perPage кол-во загружаемых на странице карточек, за один запрос к API
-     * @param {number} page индекс страницы для загрузки карточек, с каждым запросом для загрузки новых карточек увеличивается
-     * @param {number} params параметры запроса к API, описываю значение фильтрации посылаемые к API, по которому будут выбираться карточки 
-     * @throws {Error}
-     */
-    async cardAppendOnRoot(cards, perPage, page, params = {}) {
-        try {
-            await this.cardApiLoadData(cards, perPage, page, params);
-
-            if (cards.length < perPage) {
-                document.querySelector('.card-block__load-card').classList.add('visually-hidden');
-            }
-            for (const card of cards) {
-                document.querySelector('.card-block__list').insertAdjacentHTML('beforeend', card.cardDefinition());
-            }
-        } catch (err) {
-            console.error(err);
-        };
-    }
-}
+import ApiSettings from "./ApiSettings.js";
+import { NUM_CARD_IN_PAGE, MAX_CARD_LOADING, TIMEOUT_API_CALL } from "./utils/constants.js"; 
+import { validationRules } from "./utils/regex.js";
+import { MASK_PHONE } from "./utils/mask.js";
 
 /** 
  * Функция проверки объекта на наличие значения
@@ -414,7 +10,7 @@ class CardsHandler {
  * @param {object} obj объект для проверки
  * @returns {boolean} значение bool обозначающее наличие или отсутствие содержимого в объекте
  */
-const isEmptyObject = (obj) => {
+export const isEmptyObject = (obj) => {
     return Object.keys(obj).length === 0;
 }
 
@@ -460,6 +56,7 @@ const resetArrowImg = (elem) => {
 */
 const validation = (wrapper, message) => {
     if (wrapper !== null) {
+
         if (wrapper.getAttribute('name') == 'name') {
             if (wrapper.value.length <= validationRules.nameLength) {
                 return false;
@@ -468,6 +65,7 @@ const validation = (wrapper, message) => {
                 return true;
             }
         }
+
         if (wrapper.getAttribute('name') == 'email') {
             if (!wrapper.value.match(validationRules.emailReg)) {
                 return false;
@@ -476,6 +74,7 @@ const validation = (wrapper, message) => {
                 return true;
             }
         }
+
         if (wrapper.getAttribute('name') == 'phoneNumber') {
             if (wrapper.value.length != validationRules.phoneReg) {
                 return false;
@@ -503,6 +102,7 @@ const submitForm = (message, formWrappers) => {
 
     for (const selectWrapper of formWrappers) {
         const filterButton = selectWrapper.querySelector('.select-wrapper__input');
+
         if (!validation(filterButton, message)) {
             returnValue = false;
             break;
@@ -515,38 +115,51 @@ const submitForm = (message, formWrappers) => {
 /** 
  * Функция проверки и корректировки формата ввода поля мобильного телефона.
  * 
- * @param {object} event объект события
+ * @param {object} selector объект привязки событий
+ * @param {string} masked формат маски ввода телефона, по умолчанию +7 (___) ___-__-__
  * 
  * @returns {boolean} значение bool обозначающее выполнение или невыполнение условий проверки валидации полей
  */
-function mask(event) {
-    let keyCode;
-    event.keyCode && (keyCode = event.keyCode);
-    var pos = this.selectionStart;
-    if (pos < 3) event.preventDefault();
-    var matrix = "+7 (___) ___ ____",
-        i = 0,
-        def = matrix.replace(/\D/g, ""),
-        val = this.value.replace(/\D/g, ""),
-        new_value = matrix.replace(/[_\d]/g, (a) => {
-            return i < val.length ? val.charAt(i++) : a
-        });
-    i = new_value.indexOf("_");
-    if (i != -1) {
-        i < 5 && (i = 3);
-        new_value = new_value.slice(0, i)
-    }
-    var reg = matrix.substr(0, this.value.length).replace(/_+/g,
-        (a) => {
-            return "\\d{1," + a.length + "}"
-        }).replace(/[+()]/g, "\\$&");
-    reg = new RegExp("^" + reg + "$");
-    if (!reg.test(this.value) || this.value.length < 5 || keyCode > 47 && keyCode < 58) {
-        this.value = new_value;
-    }
-    if (event.type == "blur" && this.value.length < 5) {
-        this.value = "";
-    }
+const maskPh = (selector, masked = '+7 (___) ___ ____') => {
+	const elem = selector;
+
+	function mask(event) {
+		const keyCode = event.keyCode;
+		const template = masked,
+			def = template.replace(/\D/g, ""),
+			val = this?.value?.replace(/\D/g, "");
+        
+		let i = 0,
+			newValue = template.replace(/[_\d]/g, (a) => {
+				return i < val?.length ? val?.charAt(i++) || def?.charAt(i) : a;
+			});
+        
+		i = newValue?.indexOf("_");
+
+		if (i !== -1) {
+			newValue = newValue.slice(0, i);
+		}
+
+		let reg = template.substr(0, this?.value?.length).replace(/_+/g,
+			 (a) => {
+				return "\\d{1," + a.length + "}";
+			}).replace(/[+()]/g, "\\$&");
+
+		reg = new RegExp("^" + reg + "$");
+
+		if (!reg.test(this?.value) || this?.value.length < 5 || keyCode > 47 && keyCode < 58) {
+			this.value = newValue;
+		}
+
+		if (event.type === "blur" && this?.value.length < 5) {
+			this.value = "";
+		}
+	}
+
+	elem.addEventListener("input", mask);
+	elem.addEventListener("focus", mask);
+	elem.addEventListener("blur", mask);
+	
 }
 
 /** 
@@ -560,6 +173,7 @@ const detailsDescriptionEvent = (cardButton) => {
 
     card.querySelector('.card__description-footer').classList.toggle('card__description-footer--hide');
     card.querySelector('.card__description').classList.toggle('card__description--full');
+
     if (cardButton.innerText == 'More details') {
         cardButton.innerHTML = 'Less details';
         cardDetails.classList.add('card__details--up');
@@ -578,7 +192,7 @@ const detailsDescriptionEvent = (cardButton) => {
  * @param {object} cardData объект содержащий параметры работы с API загрузки карточек
  * @param {object} loadCardButton объект DOM кнопки загрузки карточек
  */
-const loadCardsEvent = (cardData, loadCardButton) => (event) => {
+const loadCardsEvent = (cardData, loadCardButton, timeout = 4500) => (event) => {
     if (cardData.getIndexPage() * cardData.getNumCardInPage() >= cardData.getMaxCardLoading()) {
         document.querySelector('.card-block__load-card').classList.add('card-block__load-card--hide');
         cardData.indexPageReset();
@@ -586,10 +200,12 @@ const loadCardsEvent = (cardData, loadCardButton) => (event) => {
     } else {
         let params = {};
         loadCardButton.disabled = true;
+
         loadCardDataWithParams(params, cardData);
+
         setTimeout(() => {
             loadCardButton.disabled = false;
-        }, 4500);
+        }, timeout);
     }
 }
 
@@ -606,9 +222,10 @@ const loadCardDataWithParams = (params, cardData) => {
         const paramValue = param.getAttribute('data-eventual');
 
         if (paramValue !== 'NotSelected') {
-            params['&' + param.getAttribute('data-key') + '='] = paramValue;
+            params[param.getAttribute('data-key')] = paramValue;
         }
     }
+
     cardData.clearCards();
     cardData.loadCardData(params);
 }
@@ -620,21 +237,24 @@ const loadCardDataWithParams = (params, cardData) => {
  * @param {object} cardData объект содержащий параметры работы с API загрузки карточек
  * @param {object} loadCardButton объект DOM кнопки загрузки карточек
  */
-const filterCardLoadEvent = (cardData, loadCardButton) => (event) => {
+const filterCardLoadEvent = (cardData, loadCardButton, timeout = 4500) => (event) => {
     const paramsList = document.querySelectorAll('.filter');
     let params = {};
 
     cardData.indexPageReset();
     document.querySelector('.card-block__load-card').classList.remove('visually-hidden');
+
     for (const param of paramsList) {
         param.setAttribute('data-eventual', param.getAttribute('data-preliminary'));
     }
+
     document.querySelector('.card-block__list').innerText = '';
     loadCardButton.disabled = true;
     loadCardDataWithParams(params, cardData);
+
     setTimeout(() => {
         loadCardButton.disabled = false;
-    }, 4500);
+    }, timeout);
 }
 
 /** 
@@ -646,13 +266,16 @@ const filterCardClearEvent = (cardData) => (event) => {
     const paramsList = document.querySelectorAll('.filter');
 
     cardData.indexPageReset();
+
     document.querySelector('.card-block__load-card').classList.remove('visually-hidden');
+
     for (const param of paramsList) {
         param.setAttribute('data-eventual', 'NotSelected');
         param.setAttribute('data-preliminary', 'NotSelected');
         param.innerText = 'Not selected';
         param.classList.remove('select-wrapper__input--selected');
     }
+
     document.querySelector('.card-block__list').innerText = '';
     document.querySelector('.filters__clear-filters').classList.add('filters__clear-filters--hide');
     loadCardDataWithParams({}, cardData);
@@ -678,6 +301,7 @@ const filterButtonToggleOptionSelectedVisibleEvent = (selectList, filterButton) 
 const filterResetArrowEvent = (filter, listFilters) => (event) => {
     if (filter.classList.contains('select-wrapper__input--up')) {
         resetArrowImg(filter);
+
         Object.entries(listFilters).filter(currentFilter => filter !== currentFilter[1])
             .forEach(currentFilter => {
                 currentFilter?.classList.remove('select-wrapper__input--up');
@@ -754,9 +378,11 @@ const filterDataEvents = (wrappers) => {
                 const selectListItem = selectList.querySelectorAll('.select-wrapper__list-item');
 
                 addListener(filterButton, filterButtonToggleOptionSelectedVisibleEvent(selectList, filterButton), 'click');
+
                 for (const item of selectListItem) {
                     addListener(item, selectListItemEvent(selectList, filterButton, item), 'click');
                 }
+
                 addListener(document, listItemsHideClickEvent(selectList, filterButton), 'click');
                 addListener(document, listItemsHideKeydownEvent(selectList, filterButton), 'keydown');
             }
@@ -777,12 +403,14 @@ const formSubmit = (form, formWrappers) => (event) => {
         phoneNumber: '',
         comment: '',
     };
+
     if (form !== null) {
         if (!submitForm(message, formWrappers)) {
-            evt.preventDefault();
+            event.preventDefault();
             return false;
         }
     }
+
     alert('Sent name: ' + message.name + '\nSent email: ' + message.email + '\nSent phone: ' + message.phoneNumber + '\nSent comment: ' + message.comment);
 
 }
@@ -802,22 +430,21 @@ const addEvents = (cardData) => {
     const form = document.querySelector('.request-block__form');
     const formWrappers = document.querySelectorAll('.form__label');
 
-    addListener(loadCardButton, loadCardsEvent(cardData, loadCardButton), 'click');
-    addListener(filterCards, filterCardLoadEvent(cardData, filterCards), 'click');
+    addListener(loadCardButton, loadCardsEvent(cardData, loadCardButton, TIMEOUT_API_CALL), 'click');
+    addListener(filterCards, filterCardLoadEvent(cardData, filterCards, TIMEOUT_API_CALL), 'click');
     addListener(filtersClear, filterCardClearEvent(cardData), 'click');
     filterDataEvents(wrappers);
+
     for (const filter of filters) {
         addListener(filter, filterResetArrowEvent(filter, filters), 'click');
     }
-    addListener(phone, mask, 'input');
-    addListener(phone, mask, 'focus');
-    addListener(phone, mask, 'blur');
-    addListener(phone, mask, 'keydown');
+
+    maskPh(phone, MASK_PHONE);
     addListener(form, formSubmit(form, formWrappers), 'submit');
 }
 
 window.onload = () => {
-    const cardData = new ApiSettings();
+    const cardData = new ApiSettings(NUM_CARD_IN_PAGE, MAX_CARD_LOADING);
 
     cardData.loadCardData();
     addEvents(cardData);

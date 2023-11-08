@@ -1,0 +1,58 @@
+@use "../global/base";
+@use "../global/fonts";
+@use "../global/mixins";
+
+.footer {
+    background-color: $cl-grey900;
+    &__content {
+      display: flex;
+      flex-wrap: wrap;
+      row-gap: calc($minor * 5);
+      width: 100%;
+      padding: calc($major * 5) 0;
+      color: $cl-baseColor;
+    }
+  
+    &__contacts {
+      display: flex;
+      flex-direction: column;
+      gap: $major;
+      height: auto;
+      width: clamp(calc($minor * 72), 100%, calc($minor * 97.5));
+      font: font(500, $fontSizeL, 140%);
+      margin-right: auto;
+      @include mq($md) {
+        font: font(500, $fontSizeM, 140%);
+      }
+    }
+  
+    &__address {
+      display: flex;
+      flex-direction: column;
+      gap: $major;
+      position: relative;
+      font: font(400, $fontSizeM, 145%);
+      text-align: end;
+      @include mq($md) {
+        font: font(400, $fontSizeS, 145%);
+      }
+  
+      &:last-child:before {
+        content: "";
+        position: absolute;
+        height: calc($minor/4);
+        opacity: 0.2;
+        background: $cl-baseColor;
+        width: calc($minor * 18);
+        top: 100%;
+      }
+      &:nth-child(n) {
+        text-align: end;
+        align-items: end;
+        @include mq($md) {
+          align-items: start;
+          text-align: start;
+        }
+      }
+    }
+}
