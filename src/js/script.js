@@ -120,7 +120,7 @@ const submitForm = (message, formWrappers) => {
  * 
  * @returns {boolean} значение bool обозначающее выполнение или невыполнение условий проверки валидации полей
  */
-const maskPh = (selector, masked = '+7 (___) ___ ____') => {
+const maskPhone = (selector, masked = '+7 (___) ___ ____') => {
 	const elem = selector;
 
 	function mask(event) {
@@ -439,7 +439,7 @@ const addEvents = (cardData) => {
         addListener(filter, filterResetArrowEvent(filter, filters), 'click');
     }
 
-    maskPh(phone, MASK_PHONE);
+    maskPhone(phone, MASK_PHONE);
     addListener(form, formSubmit(form, formWrappers), 'submit');
 }
 
