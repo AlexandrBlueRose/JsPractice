@@ -131,52 +131,65 @@ export default class Card {
             this.#classOption = 'visually-hidden';
         }
         return `
-    <div class = "card card-block__item">
-      <div class = "card__body">
-        <div class = "card__title">
-          <div class = "card__header-logo container-header-logo">
-            <h3 class = "card__position-title">${this.#title}</h3>
-            <img class = "card__logo ${this.#classOption}" src = "${this.#logoUrl}" alt = 'Company logo' height = "40px" width = "auto">
+        <div class = "card card-block__item">
+          <div class = "card__body">
+            <div class = "card__title">
+
+              <div class = "card__header-logo container-header-logo">
+                <h3 class = "card__position-title">${this.#title}</h3>
+                
+                <img class = "card__logo ${this.#classOption}" src = "${this.#logoUrl}" alt = 'Company logo' height = "40px" width = "auto">
+              </div>
+
+              <button class = "card__respond-button">Respond</button>
+            </div>
+
+            <div class = "card__working-condition">
+              <p class = "condition-gray card__form-working-time">
+                Form
+
+                <span class = "card__data-working-time">
+                  ${this.#conditions.form}
+                </span>
+              </p>
+
+              <p class = "condition-gray card__company-name">
+                Company
+
+                <span class = "card__data-company-name">
+                  ${this.#conditions.company}
+                </span>
+              </p>
+
+              <p class = "condition-gray card__website">
+                Web
+                <a class = "span card__data-website" href = "${this.#conditions.web}">
+                  ${this.#conditions.web}
+                </a>
+              </p>
+
+              <p class = "condition-gray card__address">
+              Address
+
+                <span class = "card__data-address">
+                  ${this.#conditions.address}
+                </span>
+              </p> 
+            </div>
+
+            <div class = "card__description">
+              ${this.#description}
+
+              <div class = "card__description-footer">
+              </div>
+            </div>
+
+            <div class = "card__details card__details--down">
+              <button class = "link card__details-button" onClick = "detailsDescriptionEvent(this)">More details</button>
+            </div>
           </div>
-          <button class = "card__respond-button">Respond</button>
         </div>
-        <div class = "card__working-condition">
-          <p class = "condition-gray card__form-working-time">
-            Form
-            <span class = "card__data-working-time">
-              ${this.#conditions.form}
-            </span>
-          </p>
-          <p class = "condition-gray card__company-name">
-            Company
-            <span class = "card__data-company-name">
-              ${this.#conditions.company}
-            </span>
-          </p>
-          <p class = "condition-gray card__website">
-            Web
-            <a class = "span card__data-website" href = "${this.#conditions.web}">
-              ${this.#conditions.web}
-            </a>
-          </p>
-          <p class = "condition-gray card__address">
-          Address
-            <span class = "card__data-address">
-              ${this.#conditions.address}
-            </span>
-          </p> 
-        </div>
-        <div class = "card__description">
-          ${this.#description}
-          <div class = "card__description-footer">
-          </div>
-        </div>
-        <div class = "card__details card__details--down">
-          <button class = "link card__details-button" onClick = "detailsDescriptionEvent(this)">More details</button>
-        </div>
-      </div>
-    </div>
-    `;
+        `;
     }
 
 }
