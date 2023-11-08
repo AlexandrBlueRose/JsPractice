@@ -57,7 +57,7 @@ const resetArrowImg = (elem) => {
 const validation = (wrapper, message) => {
     if (wrapper !== null) {
 
-        if (wrapper.getAttribute('name') == 'name') {
+        if (wrapper.getAttribute('name') === 'name') {
             if (wrapper.value.length <= validationRules.nameLength) {
                 return false;
             } else {
@@ -66,7 +66,7 @@ const validation = (wrapper, message) => {
             }
         }
 
-        if (wrapper.getAttribute('name') == 'email') {
+        if (wrapper.getAttribute('name') === 'email') {
             if (!wrapper.value.match(validationRules.emailReg)) {
                 return false;
             } else {
@@ -75,7 +75,7 @@ const validation = (wrapper, message) => {
             }
         }
 
-        if (wrapper.getAttribute('name') == 'phoneNumber') {
+        if (wrapper.getAttribute('name') === 'phoneNumber') {
             if (wrapper.value.length != validationRules.phoneReg) {
                 return false;
             } else {
@@ -174,7 +174,7 @@ const detailsDescriptionEvent = (cardButton) => {
     card.querySelector('.card__description-footer').classList.toggle('card__description-footer--hide');
     card.querySelector('.card__description').classList.toggle('card__description--full');
 
-    if (cardButton.innerText == 'More details') {
+    if (cardButton.innerText === 'More details') {
         cardButton.innerHTML = 'Less details';
         cardDetails.classList.add('card__details--up');
         cardDetails.classList.remove('card__details--down');
