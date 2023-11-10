@@ -1,0 +1,46 @@
+//=========================FONT================================================
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/Roboto-Regular.woff2") format("woff2"),
+    url("../../fonts/Roboto-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/Roboto-Medium.woff2") format("woff2"),
+    url("../../fonts/Roboto-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Roboto";
+  src: url("../../fonts/Roboto-Bold.woff2") format("woff2"),
+    url("../../fonts/Roboto-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+$fontFamily: "Roboto";
+
+$fontSizeL: 18px;
+$fontSizeM: 16px;
+$fontSizeS: 14px;
+$fontSizeXS: 12px;
+$button: 15px;
+
+$h1: 48px;
+$h1m: 34px;
+$h2: 34px;
+$h2m: 28px;
+$h3: 28px;
+$h3m: 24px;
+$h4: 24px;
+$h4m: 20px;
+//=========================FONT END============================================

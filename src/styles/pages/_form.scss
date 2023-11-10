@@ -1,0 +1,100 @@
+@use "../global/base";
+@use "../global/fonts";
+@use "../global/mixins";
+
+.request-block {
+    background-color: $cl-grey100;
+    text-align: center;
+
+    &__form {
+      display: flex;
+      flex-direction: column;
+      gap: calc($major * 2);
+      text-align: start;
+      align-items: center;
+      margin-bottom: calc($major * 2);
+    }
+  
+    &__content {
+      padding: calc($major * 8) 0 calc($major * 11) 0;
+
+      @include mq($md) {
+        padding: calc($major * 4) 0;
+      }
+    }
+}
+  
+.form {
+    @-moz-document url-prefix() {
+      position: relative;
+    }
+
+    &__label {
+      width: clamp(calc($minor * 72), 100%, calc($minor * 147.5));
+    }
+
+    &__button {
+      padding: $major calc($major * 4);
+      width: clamp(calc($major * 36), 100%, calc($major * 48.25));
+      cursor: url(../../img/svg/pointing.svg), pointer;
+      margin-top: calc($major * 2);
+    }
+  
+    &__text-area {
+      height: calc($major * 11);
+      resize: none;
+      cursor: url(../../img/svg/pointing.svg), pointer;
+    }
+
+    &__button-description {
+      font: font(400, $fontSizeM, 140%);
+
+      @include mq($md) {
+        font: font(400, $fontSizeS, 140%);
+      }
+    }
+
+    &__legend {
+      margin-bottom: calc($minor * 5);
+      text-align: center;
+      font: font(500, $h2, 125%);
+
+      @include mq($md) {
+        margin-bottom: calc($major * 3);
+      }
+
+      @-moz-document url-prefix() {
+        position: absolute;
+        left: 50%;
+        top: -calc($minor * 3);
+        transform: translate(-50%, 0);
+      }
+    }
+
+    &__link {
+      font: font(500, $fontSizeM, 140%);
+    }
+
+    &__description {
+      margin-bottom: calc($major * 3);
+      font: font(400, $fontSizeL, 140%);
+
+      @include mq($md) {
+        font: font(400, $fontSizeM, 140%);
+      }
+
+      @-moz-document url-prefix() {
+        padding-top: calc($minor * 12);
+      }
+    }
+    &__fieldset {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: calc($major * 2);
+      min-width: 0;
+      max-width: 100%;
+      width: 100%;
+      border: none;
+    }
+}

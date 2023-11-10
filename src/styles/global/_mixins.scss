@@ -1,0 +1,39 @@
+/// Миксин для удобной записи медиа запроса.
+///
+/// @param {text} $from
+///   Обязательный параметр ширины экрана в px, если задан единственным, то идет как max-width.
+/// @param {text} $to
+///   Необязательный параметр ширины экрана в px, если задан,
+///   то идет как max-width, а `$from` идет как min-width
+/// @author Alexandr Khaidarov
+@mixin mq($from, $to: false) {
+  @if $to {
+    @media (min-width: $from) and (max-width: $to) {
+      @content;
+    }
+  } @else {
+    @media (max-width: $from) {
+      @content;
+    }
+  }
+}
+
+/// Функция для краткой записи параметров шрифта.
+///
+/// @param {number} $fontWeight
+///   Жирность шрифта.
+/// @param {number} $fontSize
+///   Размер шрифта.
+/// @param {number} $lineHeight
+///   Интервал между строчками текста.
+/// @param {text} $fontFamily
+///   Семейство шрифта.
+/// @return {text} входные данные для свойства font.
+@function font(
+  $fontWeight,
+  $fontSize,
+  $lineHeight: normal,
+  $fontFamily: $fontFamily
+) {
+  @return #{$fontWeight #{$fontSize}/ $lineHeight $fontFamily};
+}

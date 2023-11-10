@@ -1,0 +1,166 @@
+@use "../global/base";
+@use "../global/fonts";
+@use "../global/mixins";
+
+*,
+::after,
+::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font: font(normal, $fontSizeXS);
+  color: $cl-black;
+  min-width: $minWidth;
+  overflow-x: hidden;
+  background: $cl-baseColor;
+}
+
+p {
+  font: font(400, $fontSizeM, 140%);
+
+  @include mq($md) {
+    font: font(400, $fontSizeS, 140%);
+  }
+}
+
+span,
+.span {
+  color: $cl-black;
+  word-break: break-all;
+}
+
+h1 {
+  font: font(500, $h1, 120.833%);
+
+  @include mq($md) {
+    font: font(500, $h1m, 120%);
+  }
+}
+
+h2 {
+  font: font(500, $h2, 125%);
+
+  @include mq($md) {
+    font: font(500, $h2m, 120%);
+  }
+}
+
+h3 {
+  font: font(500, $h3, 125%);
+
+  @include mq($md) {
+    font: font(500, $h3m, 120%);
+  }
+}
+
+h4 {
+  font: font(500, $h4, 125%);
+
+  @include mq($md) {
+    font: font(500, $h4m, 120%);
+  }
+}
+
+strong {
+  color: $cl-black;
+  font: font(500, $fontSizeM, 140%);
+
+  @include mq($md) {
+    font: font(500, $fontSizeS, 140%);
+  }
+}
+
+li {
+  font: font(400, $fontSizeM);
+  margin-left: calc($major * 3.75);
+
+  &::marker {
+    color: $cl-black;
+    font-size: $fontSizeS;
+  }
+
+  @include mq($md) {
+    font: font(400, $fontSizeS);
+  }
+}
+
+input:invalid:not(:placeholder-shown) {
+  border-color: red;
+}
+input:valid:not(:placeholder-shown) {
+  border-color: green;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  cursor: url(../../img/svg/pointing.svg), pointer;
+}
+
+input[placeholder],
+textarea[placeholder] {
+  font: font(400, $fontSizeS, 140%);
+}
+
+.container {
+  max-width: $maxWidthContainer + calc($major * 5);
+  margin: 0 auto;
+  padding: 0 calc($minor * 5);
+
+  @include mq($xxxl) {
+    max-width: $maxWidthContainer - calc($major * 20) + calc($major * 8);
+    padding: 0 calc($major * 4);
+  }
+
+  @include mq($sm) {
+    padding: 0 calc($major * 2);
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(0px 0px 99.9% 99.9%);
+  overflow: hidden;
+  height: 1px;
+  width: 1px;
+  padding: 0;
+  border: 0;
+}
+
+.container-header-logo {
+  display: flex;
+  gap: $major;
+  align-items: center;
+  max-width: 70%;
+
+  @include mq($md) {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    max-width: 100%;
+  }
+}
+
+.condition-gray {
+  color: $cl-grey700;
+  display: flex;
+  gap: $major;
+  font: font(500, $fontSizeM);
+
+  @include mq($md) {
+    font: font(500, $fontSizeS);
+  }
+
+  span {
+    font-size: $fontSizeM;
+    
+    @include mq($md) {
+      font-size: $fontSizeS;
+    }
+  }
+}

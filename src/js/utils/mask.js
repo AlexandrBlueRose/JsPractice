@@ -1,0 +1,1 @@
+export const MASK_PHONE = '+7 (___) ___ ____';

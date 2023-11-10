@@ -1,0 +1,190 @@
+@use "../global/base";
+@use "../global/fonts";
+@use "../global/mixins";
+
+.card-block {
+    &__content {
+      display: flex;
+      flex-direction: column;
+      row-gap: calc($major * 5);
+      margin-bottom: clamp(calc($major * 4), 10%, calc($major * 13));
+    }
+  
+    &__list {
+      display: flex;
+      flex-direction: column;
+      row-gap: calc($major * 4);
+    }
+  
+    &__load-card {
+      width: clamp(calc($minor * 72), 100%, calc($minor * 87.5));
+      margin: 0 auto;
+    }
+}
+  
+.card {
+    &__body {
+      display: flex;
+      width: 100%;
+      padding: calc($major * 5) calc($major * 5) calc($major * 6);
+      gap: calc($major * 3);
+      border-radius: calc($major * 2);
+      align-items: start;
+      flex-direction: column;
+      background-color: $cl-baseColor;
+      box-shadow: $BoxLight;
+  
+      @include mq($md) {
+        gap: calc($major * 2);
+        padding: calc($minor * 5);
+      }
+    }
+  
+    &__title {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      gap: calc($minor * 3);
+      flex-wrap: wrap;
+      word-break: break-word;
+  
+      @include mq($md) {
+        flex-direction: column;
+        align-items: start;
+      }
+    }
+  
+    &__position-title {
+      color: $cl-black;
+      word-wrap: break-word;
+  
+      @include mq($md) {
+        order: 0;
+      }
+    }
+  
+    &__logo {
+      @include mq($md) {
+        order: -1;
+      }
+      @-moz-document url-prefix() {
+        width: auto;
+      }
+      @media screen and (-webkit-min-device-pixel-ratio: 0) {
+        width: auto;
+      }
+    }
+    &__logo--hide {
+      display: none;
+    }
+  
+    &__description {
+      position: relative;
+      max-height: calc($major * 50);
+      overflow: hidden;
+      max-width: 63.33%;
+  
+      @include mq($md) {
+        max-width: 100%;
+      }
+    }
+  
+    &__description--full {
+      overflow: unset;
+      max-height: max-content;
+    }
+  
+    &__description-footer {
+      position: absolute;
+      top: 90%;
+      background: linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.05) 12.82%,
+        rgba(255, 255, 255, 0.98) 50.51%,
+        rgba(255, 255, 255, 0.98) 56.86%,
+        #fff 88.19%
+      );
+      width: 100%;
+      height: calc($minor * 25);
+      opacity: 1;
+      transition: 0.5s;
+    }
+  
+    &__description-footer--hide {
+      height: 0;
+      opacity: 0;
+      transition: 0.5s;
+    }
+  
+    &__respond-button {
+      height: calc($minor * 11);
+      padding: $major calc($major * 4);
+      font: font(700, $button, 140%);
+      color: $cl-baseColor;
+      margin-left: auto;
+      background-color: $cl-grey900;
+      border: 0;
+      border-radius: $minor;
+      cursor: url(../../img/svg/pointing.svg), pointer;
+  
+      @include mq($md) {
+        margin-left: 0;
+        width: 100%;
+      }
+  
+      &:hover {
+        background-color: $cl-black;
+      }
+    }
+  
+    &__working-condition {
+      display: flex;
+      gap: calc($minor * 12);
+      font-size: $fontSizeM;
+      flex-wrap: wrap;
+      padding-bottom: calc($minor * 3);
+      row-gap: calc($minor * 5);
+      
+      @include mq($md) {
+        gap: $major;
+        flex-direction: column;
+        padding-bottom: 0;
+      }
+    }
+  
+    &__details {
+      margin: 0 auto;
+      cursor: url(../../img/svg/pointing.svg), pointer;
+    }
+  
+    &__details--down {
+      &::after {
+        content: "";
+        position: absolute;
+        background-image: url(../../img/svg/chevronDownBlue.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width: calc($major * 2);
+        height: calc($major * 2);
+        transform: translateY(32%);
+        cursor: url(../../img/svg/pointing.svg), pointer;
+      }
+    }
+  
+    &__details--up {
+      &::after {
+        content: "";
+        position: absolute;
+        background-image: url(../../img/svg/chevronUpBlue.svg);
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: 100%;
+        width: calc($major * 2);
+        height: calc($major * 2);
+        transform: translateY(32%);
+        cursor: url(../../img/svg/pointing.svg), pointer;
+      }
+    }
+}

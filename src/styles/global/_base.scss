@@ -1,0 +1,39 @@
+//=========================COLORS AND SHADOWS==================================
+
+$cl-baseColor: #fff;
+$cl-black: #131313;
+$cl-grey900: #383838;
+$cl-grey800: #787f85;
+$cl-grey700: #959da3;
+$cl-grey600: #acb3b9;
+$cl-grey500: #c1c6cb;
+$cl-grey400: #cdd2d7;
+$cl-grey300: #dadee2;
+$cl-grey200: #eef0f4;
+$cl-grey100: #f7f9fb;
+$cl-blue: #0d7ad9;
+$cl-lightcl-blue: #a6cef1;
+$cl-blueHover: #175098;
+
+//Тень
+$Box: 0px 0px 24px 0px rgba(38, 41, 43, 0.15);
+$BoxLight: 0px 0px 16px 0px rgba(30, 30, 30, 0.1);
+//=========================COLORS AND SHADOWS END==============================
+
+//=========================VARIABLES===========================================
+$minor: 4px;
+$major: 8px;
+
+$xs: 0;
+$sm: 576px;
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+$xxl: 1400px;
+$xxxl: 1600px;
+
+$minWidth: 320px;
+$maxWidth: 1920px;
+$maxWidthContainer: 1360px;
+
+//=========================VARIABLES END=======================================

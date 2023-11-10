@@ -1,0 +1,26 @@
+{
+  "name": "test",
+  "scripts": {
+    "build": "gulp build",
+    "dev": "gulp dev"
+  },
+  "dependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^5.1.0",
+    "gulp-sourcemaps": "^3.0.0",
+    "gulp-util": "^3.0.8",
+    "html": "^1.0.0",
+    "http-server": "^14.1.1",
+    "sass": "^1.69.4"
+  },
+  "devDependencies": {
+    "browser-sync": "^2.29.3",
+    "del": "^5.0.0",
+    "gulp-autoprefixer": "^8.0.0"
+  },
+  "version": "1.0.0",
+  "main": "src/js/script.js",
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
